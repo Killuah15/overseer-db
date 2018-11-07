@@ -26,6 +26,12 @@ input CreateUserInput {
   email: String!
 }
 
+input UpdateUserInput {
+  name: String
+  password: String
+  email: String
+}
+
 #----------ENUMS----------
 
 enum MutationType {
