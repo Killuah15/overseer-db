@@ -1,0 +1,8 @@
+projects:
+  overseer:
+    schemaPath: ./src/generated/prisma.graphql
+    includes: ["**/*.graphql"]
+    extensions:
+      prisma: ./database/prisma.yml
+      endpoints:
+          default: https://overseer-db.herokuapp.com/overseer-db/dev

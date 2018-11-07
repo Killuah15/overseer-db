@@ -1,0 +1,27 @@
+{
+  "name": "overseer-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "heroku-postbuild": "babel src --out-dir dist --copy-files",
+    "dev": "npm run get-schema && env-cmd ./config/dev.env nodemon . --ext js,graphql --exec babel-node",
+    "get-schema": "graphql get-schema -p overseer --dotenv config/dev.env",
+    "prisma:dev": "prisma deploy -e ./config/dev.env"
+  },
+  "author": "Robin Dürhager & Robert Pasdziernik",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "graphql": "^14.0.2",
+    "graphql-yoga": "^1.16.7",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.11",
+    "prisma-binding": "^2.1.6"
+  }
+}

@@ -1,0 +1,17 @@
+#----------TYPES----------
+type User {
+  id: ID!
+  name: String!
+  email: String
+  updatedAt: String!
+  createdAt: String!
+}
+
+#----------METHODS----------
+type Query {
+    users: [User!]!
+}
+
+#----------INPUT----------
+
+#----------ENUMS----------
