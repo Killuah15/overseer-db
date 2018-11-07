@@ -8,7 +8,8 @@
     "heroku-postbuild": "babel src --out-dir dist --copy-files",
     "dev": "npm run get-schema && env-cmd ./config/dev.env nodemon . --ext js,graphql --exec babel-node",
     "get-schema": "graphql get-schema -p overseer --dotenv config/dev.env",
-    "prisma:dev": "prisma deploy -e ./config/dev.env"
+    "prisma:dev": "prisma deploy -e ./config/dev.env",
+    "prisma:prod": "git push heroku master"
   },
   "author": "Robin Dürhager & Robert Pasdziernik",
   "license": "ISC",
