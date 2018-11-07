@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "heroku-postbuild": "babel src --out-dir dist --copy-files",
-    "dev": "npm run get-schema && env-cmd ./config/dev.env nodemon . --ext js,graphql --exec babel-node",
+    "dev": "env-cmd ./config/dev.env nodemon . --ext js,graphql --exec babel-node",
     "get-schema": "graphql get-schema -p overseer --dotenv config/dev.env",
     "deploy:dev": "npm run get-schema && prisma deploy -e ./config/dev.env",
     "deploy:prod": "npm run get-schema && git push heroku master"
