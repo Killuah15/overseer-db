@@ -7,8 +7,8 @@ const server = new GraphQLServer({
     resolvers,
     context(request) {
       return {
+        ...request,
         prisma,
-        request
       }
     },
     fragmentReplacements

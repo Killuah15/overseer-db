@@ -3,3 +3,5 @@ const Query = {
         return prisma.query.users({}, info)
     }
 }
+
+export default Query

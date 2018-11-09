@@ -1,5 +1,5 @@
 import { extractFragmentReplacements } from "prisma-binding";
-import Query from "./Query";
+import Query from "./_Query";
 
 const resolvers = {
   Query,
