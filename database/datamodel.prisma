@@ -1,10 +1,34 @@
+#----------TYPES----------
 type User {
   id: ID! @unique
-  name: String!
+  username: String!
   email: String! @unique
   password: String!
+  events: [Event!]! @relation(name: "EventsByUser", onDelete: CASCADE)
+  projects: [Project!]! @relation(name: "ProjectsByUser", onDelete: CASCADE)
   updatedAt: DateTime!
   createdAt: DateTime!
 }
 
+type Project {
+  id: ID! @unique
+  title: String!
+  description: String
+  events: [Event!]! @relation(name: "EventsByProject", onDelete: CASCADE)
+  author: User! @relation(name: "ProjectsByUser", onDelete: SET_NULL)
+}
 
+type Event {
+  id: ID! @unique
+  title: String!
+  eventRole: EventRole!
+  project: Project! @relation(name: "EventsByProject", onDelete: SET_NULL)
+  author: User! @relation(name: "EventsByUser", onDelete: SET_NULL)
+}
+
+#----------ENUMS----------
+enum EventRole {
+  GENERIC,
+  QUEST,
+  FIGHT
+}

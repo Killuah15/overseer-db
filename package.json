@@ -9,7 +9,8 @@
     "dev": "env-cmd ./config/dev.env nodemon . --ext js,graphql --exec babel-node",
     "get-schema": "graphql get-schema -p overseer --dotenv config/dev.env",
     "login": "prisma login && heroku login",
-    "deploy:dev": "npm run get-schema && prisma deploy -e ./config/dev.env",
+    "get-token": "prisma token -e ./config/dev.env",
+    "deploy:dev": "prisma deploy -e ./config/dev.env && npm run get-schema",
     "deploy:prod": "npm run get-schema && prisma deploy -e ./config/prod.env",
     "deploy:heroku": "npm run deploy:prod && git push heroku master"
   },

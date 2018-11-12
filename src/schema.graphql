@@ -1,17 +1,41 @@
+#import Event,Project,EventRole from "./generated/prisma.graphql"
 #----------TYPES----------
 type User {
   id: ID!
-  name: String!
-  email: String
+  username: String!
+  email: String!
+  events: [Event!]!
+  projects: [Project!]!
   updatedAt: String!
   createdAt: String!
 }
 
-#----------METHODS----------
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+#----------OPERATIONS----------
 type Query {
     users: [User!]!
 }
 
+type Mutation {
+  signup(data: SignupInput): AuthPayload!
+  login(data: LoginInput): AuthPayload!
+}
+
 #----------INPUT----------
+
+input SignupInput {
+  email: String!
+  username: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
 
 #----------ENUMS----------
