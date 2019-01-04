@@ -6,6 +6,7 @@ type User {
   password: String!
   events: [Event!]! @relation(name: "EventsByUser", onDelete: CASCADE)
   projects: [Project!]! @relation(name: "ProjectsByUser", onDelete: CASCADE)
+  creatures: [Creature!]! @relation(name: "CreaturesByUser", onDelete: CASCADE)
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -16,19 +17,46 @@ type Project {
   description: String
   events: [Event!]! @relation(name: "EventsByProject", onDelete: CASCADE)
   author: User! @relation(name: "ProjectsByUser", onDelete: SET_NULL)
+  creatures: [Creature!]! @relation(name: "CreaturesByProject", onDelete: CASCADE)
 }
 
 type Event {
   id: ID! @unique
   title: String!
+  description: String
   eventRole: EventRole!
   project: Project! @relation(name: "EventsByProject", onDelete: SET_NULL)
   author: User! @relation(name: "EventsByUser", onDelete: SET_NULL)
+  creatures: [Creature!]! @relation(name: "EventsByCreature", onDelete: CASCADE)
+}
+
+type Creature {
+  id: ID! @unique
+  author: User! @relation(name: "CreaturesByUser", onDelete: SET_NULL)
+  project: Project! @relation(name: "CreaturesByProject", onDelete: SET_NULL)
+  event: Event! @relation(name: "EventsByCreature", onDelete: SET_NULL)
+  name: String
+  race: String!
+  shadow: String
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+  defense: Int!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
 }
 
 #----------ENUMS----------
 enum EventRole {
   GENERIC,
   QUEST,
-  FIGHT
+  COMBAT
 }

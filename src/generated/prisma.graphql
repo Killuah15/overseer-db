@@ -1,5 +1,9 @@
 # source: https://overseer-db.herokuapp.com/overseer-db/dev
-# timestamp: Mon Nov 12 2018 18:55:30 GMT+0100 (GMT+01:00)
+# timestamp: Fri Jan 04 2019 19:56:39 GMT+0100 (GMT+01:00)
+
+type AggregateCreature {
+  count: Int!
+}
 
 type AggregateEvent {
   count: Int!
@@ -18,14 +22,901 @@ type BatchPayload {
   count: Long!
 }
 
+type Creature implements Node {
+  id: ID!
+  author(where: UserWhereInput): User!
+  project(where: ProjectWhereInput): Project!
+  event(where: EventWhereInput): Event!
+  name: String
+  race: String!
+  shadow: String
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+  defense: Int!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+}
+
+"""A connection to a list of items."""
+type CreatureConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CreatureEdge]!
+  aggregate: AggregateCreature!
+}
+
+input CreatureCreateInput {
+  name: String
+  race: String!
+  shadow: String
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+  defense: Int!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  author: UserCreateOneWithoutCreaturesInput!
+  project: ProjectCreateOneWithoutCreaturesInput!
+  event: EventCreateOneWithoutCreaturesInput!
+}
+
+input CreatureCreateManyWithoutAuthorInput {
+  create: [CreatureCreateWithoutAuthorInput!]
+  connect: [CreatureWhereUniqueInput!]
+}
+
+input CreatureCreateManyWithoutEventInput {
+  create: [CreatureCreateWithoutEventInput!]
+  connect: [CreatureWhereUniqueInput!]
+}
+
+input CreatureCreateManyWithoutProjectInput {
+  create: [CreatureCreateWithoutProjectInput!]
+  connect: [CreatureWhereUniqueInput!]
+}
+
+input CreatureCreateWithoutAuthorInput {
+  name: String
+  race: String!
+  shadow: String
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+  defense: Int!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  project: ProjectCreateOneWithoutCreaturesInput!
+  event: EventCreateOneWithoutCreaturesInput!
+}
+
+input CreatureCreateWithoutEventInput {
+  name: String
+  race: String!
+  shadow: String
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+  defense: Int!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  author: UserCreateOneWithoutCreaturesInput!
+  project: ProjectCreateOneWithoutCreaturesInput!
+}
+
+input CreatureCreateWithoutProjectInput {
+  name: String
+  race: String!
+  shadow: String
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+  defense: Int!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  author: UserCreateOneWithoutCreaturesInput!
+  event: EventCreateOneWithoutCreaturesInput!
+}
+
+"""An edge in a connection."""
+type CreatureEdge {
+  """The item at the end of the edge."""
+  node: Creature!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CreatureOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  race_ASC
+  race_DESC
+  shadow_ASC
+  shadow_DESC
+  toughness_ASC
+  toughness_DESC
+  painThreshold_ASC
+  painThreshold_DESC
+  corruption_ASC
+  corruption_DESC
+  corruptionThreshold_ASC
+  corruptionThreshold_DESC
+  corruptionPermanent_ASC
+  corruptionPermanent_DESC
+  defense_ASC
+  defense_DESC
+  accurate_ASC
+  accurate_DESC
+  cunning_ASC
+  cunning_DESC
+  discreet_ASC
+  discreet_DESC
+  persuasive_ASC
+  persuasive_DESC
+  quick_ASC
+  quick_DESC
+  resolute_ASC
+  resolute_DESC
+  strong_ASC
+  strong_DESC
+  vigilant_ASC
+  vigilant_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CreaturePreviousValues {
+  id: ID!
+  name: String
+  race: String!
+  shadow: String
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+  defense: Int!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+}
+
+type CreatureSubscriptionPayload {
+  mutation: MutationType!
+  node: Creature
+  updatedFields: [String!]
+  previousValues: CreaturePreviousValues
+}
+
+input CreatureSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CreatureSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CreatureSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CreatureSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CreatureWhereInput
+}
+
+input CreatureUpdateInput {
+  name: String
+  race: String
+  shadow: String
+  toughness: Int
+  painThreshold: Int
+  corruption: Int
+  corruptionThreshold: Int
+  corruptionPermanent: Int
+  defense: Int
+  accurate: Int
+  cunning: Int
+  discreet: Int
+  persuasive: Int
+  quick: Int
+  resolute: Int
+  strong: Int
+  vigilant: Int
+  author: UserUpdateOneWithoutCreaturesInput
+  project: ProjectUpdateOneWithoutCreaturesInput
+  event: EventUpdateOneWithoutCreaturesInput
+}
+
+input CreatureUpdateManyWithoutAuthorInput {
+  create: [CreatureCreateWithoutAuthorInput!]
+  connect: [CreatureWhereUniqueInput!]
+  disconnect: [CreatureWhereUniqueInput!]
+  delete: [CreatureWhereUniqueInput!]
+  update: [CreatureUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [CreatureUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input CreatureUpdateManyWithoutEventInput {
+  create: [CreatureCreateWithoutEventInput!]
+  connect: [CreatureWhereUniqueInput!]
+  disconnect: [CreatureWhereUniqueInput!]
+  delete: [CreatureWhereUniqueInput!]
+  update: [CreatureUpdateWithWhereUniqueWithoutEventInput!]
+  upsert: [CreatureUpsertWithWhereUniqueWithoutEventInput!]
+}
+
+input CreatureUpdateManyWithoutProjectInput {
+  create: [CreatureCreateWithoutProjectInput!]
+  connect: [CreatureWhereUniqueInput!]
+  disconnect: [CreatureWhereUniqueInput!]
+  delete: [CreatureWhereUniqueInput!]
+  update: [CreatureUpdateWithWhereUniqueWithoutProjectInput!]
+  upsert: [CreatureUpsertWithWhereUniqueWithoutProjectInput!]
+}
+
+input CreatureUpdateWithoutAuthorDataInput {
+  name: String
+  race: String
+  shadow: String
+  toughness: Int
+  painThreshold: Int
+  corruption: Int
+  corruptionThreshold: Int
+  corruptionPermanent: Int
+  defense: Int
+  accurate: Int
+  cunning: Int
+  discreet: Int
+  persuasive: Int
+  quick: Int
+  resolute: Int
+  strong: Int
+  vigilant: Int
+  project: ProjectUpdateOneWithoutCreaturesInput
+  event: EventUpdateOneWithoutCreaturesInput
+}
+
+input CreatureUpdateWithoutEventDataInput {
+  name: String
+  race: String
+  shadow: String
+  toughness: Int
+  painThreshold: Int
+  corruption: Int
+  corruptionThreshold: Int
+  corruptionPermanent: Int
+  defense: Int
+  accurate: Int
+  cunning: Int
+  discreet: Int
+  persuasive: Int
+  quick: Int
+  resolute: Int
+  strong: Int
+  vigilant: Int
+  author: UserUpdateOneWithoutCreaturesInput
+  project: ProjectUpdateOneWithoutCreaturesInput
+}
+
+input CreatureUpdateWithoutProjectDataInput {
+  name: String
+  race: String
+  shadow: String
+  toughness: Int
+  painThreshold: Int
+  corruption: Int
+  corruptionThreshold: Int
+  corruptionPermanent: Int
+  defense: Int
+  accurate: Int
+  cunning: Int
+  discreet: Int
+  persuasive: Int
+  quick: Int
+  resolute: Int
+  strong: Int
+  vigilant: Int
+  author: UserUpdateOneWithoutCreaturesInput
+  event: EventUpdateOneWithoutCreaturesInput
+}
+
+input CreatureUpdateWithWhereUniqueWithoutAuthorInput {
+  where: CreatureWhereUniqueInput!
+  data: CreatureUpdateWithoutAuthorDataInput!
+}
+
+input CreatureUpdateWithWhereUniqueWithoutEventInput {
+  where: CreatureWhereUniqueInput!
+  data: CreatureUpdateWithoutEventDataInput!
+}
+
+input CreatureUpdateWithWhereUniqueWithoutProjectInput {
+  where: CreatureWhereUniqueInput!
+  data: CreatureUpdateWithoutProjectDataInput!
+}
+
+input CreatureUpsertWithWhereUniqueWithoutAuthorInput {
+  where: CreatureWhereUniqueInput!
+  update: CreatureUpdateWithoutAuthorDataInput!
+  create: CreatureCreateWithoutAuthorInput!
+}
+
+input CreatureUpsertWithWhereUniqueWithoutEventInput {
+  where: CreatureWhereUniqueInput!
+  update: CreatureUpdateWithoutEventDataInput!
+  create: CreatureCreateWithoutEventInput!
+}
+
+input CreatureUpsertWithWhereUniqueWithoutProjectInput {
+  where: CreatureWhereUniqueInput!
+  update: CreatureUpdateWithoutProjectDataInput!
+  create: CreatureCreateWithoutProjectInput!
+}
+
+input CreatureWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CreatureWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CreatureWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CreatureWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  race: String
+
+  """All values that are not equal to given value."""
+  race_not: String
+
+  """All values that are contained in given list."""
+  race_in: [String!]
+
+  """All values that are not contained in given list."""
+  race_not_in: [String!]
+
+  """All values less than the given value."""
+  race_lt: String
+
+  """All values less than or equal the given value."""
+  race_lte: String
+
+  """All values greater than the given value."""
+  race_gt: String
+
+  """All values greater than or equal the given value."""
+  race_gte: String
+
+  """All values containing the given string."""
+  race_contains: String
+
+  """All values not containing the given string."""
+  race_not_contains: String
+
+  """All values starting with the given string."""
+  race_starts_with: String
+
+  """All values not starting with the given string."""
+  race_not_starts_with: String
+
+  """All values ending with the given string."""
+  race_ends_with: String
+
+  """All values not ending with the given string."""
+  race_not_ends_with: String
+  shadow: String
+
+  """All values that are not equal to given value."""
+  shadow_not: String
+
+  """All values that are contained in given list."""
+  shadow_in: [String!]
+
+  """All values that are not contained in given list."""
+  shadow_not_in: [String!]
+
+  """All values less than the given value."""
+  shadow_lt: String
+
+  """All values less than or equal the given value."""
+  shadow_lte: String
+
+  """All values greater than the given value."""
+  shadow_gt: String
+
+  """All values greater than or equal the given value."""
+  shadow_gte: String
+
+  """All values containing the given string."""
+  shadow_contains: String
+
+  """All values not containing the given string."""
+  shadow_not_contains: String
+
+  """All values starting with the given string."""
+  shadow_starts_with: String
+
+  """All values not starting with the given string."""
+  shadow_not_starts_with: String
+
+  """All values ending with the given string."""
+  shadow_ends_with: String
+
+  """All values not ending with the given string."""
+  shadow_not_ends_with: String
+  toughness: Int
+
+  """All values that are not equal to given value."""
+  toughness_not: Int
+
+  """All values that are contained in given list."""
+  toughness_in: [Int!]
+
+  """All values that are not contained in given list."""
+  toughness_not_in: [Int!]
+
+  """All values less than the given value."""
+  toughness_lt: Int
+
+  """All values less than or equal the given value."""
+  toughness_lte: Int
+
+  """All values greater than the given value."""
+  toughness_gt: Int
+
+  """All values greater than or equal the given value."""
+  toughness_gte: Int
+  painThreshold: Int
+
+  """All values that are not equal to given value."""
+  painThreshold_not: Int
+
+  """All values that are contained in given list."""
+  painThreshold_in: [Int!]
+
+  """All values that are not contained in given list."""
+  painThreshold_not_in: [Int!]
+
+  """All values less than the given value."""
+  painThreshold_lt: Int
+
+  """All values less than or equal the given value."""
+  painThreshold_lte: Int
+
+  """All values greater than the given value."""
+  painThreshold_gt: Int
+
+  """All values greater than or equal the given value."""
+  painThreshold_gte: Int
+  corruption: Int
+
+  """All values that are not equal to given value."""
+  corruption_not: Int
+
+  """All values that are contained in given list."""
+  corruption_in: [Int!]
+
+  """All values that are not contained in given list."""
+  corruption_not_in: [Int!]
+
+  """All values less than the given value."""
+  corruption_lt: Int
+
+  """All values less than or equal the given value."""
+  corruption_lte: Int
+
+  """All values greater than the given value."""
+  corruption_gt: Int
+
+  """All values greater than or equal the given value."""
+  corruption_gte: Int
+  corruptionThreshold: Int
+
+  """All values that are not equal to given value."""
+  corruptionThreshold_not: Int
+
+  """All values that are contained in given list."""
+  corruptionThreshold_in: [Int!]
+
+  """All values that are not contained in given list."""
+  corruptionThreshold_not_in: [Int!]
+
+  """All values less than the given value."""
+  corruptionThreshold_lt: Int
+
+  """All values less than or equal the given value."""
+  corruptionThreshold_lte: Int
+
+  """All values greater than the given value."""
+  corruptionThreshold_gt: Int
+
+  """All values greater than or equal the given value."""
+  corruptionThreshold_gte: Int
+  corruptionPermanent: Int
+
+  """All values that are not equal to given value."""
+  corruptionPermanent_not: Int
+
+  """All values that are contained in given list."""
+  corruptionPermanent_in: [Int!]
+
+  """All values that are not contained in given list."""
+  corruptionPermanent_not_in: [Int!]
+
+  """All values less than the given value."""
+  corruptionPermanent_lt: Int
+
+  """All values less than or equal the given value."""
+  corruptionPermanent_lte: Int
+
+  """All values greater than the given value."""
+  corruptionPermanent_gt: Int
+
+  """All values greater than or equal the given value."""
+  corruptionPermanent_gte: Int
+  defense: Int
+
+  """All values that are not equal to given value."""
+  defense_not: Int
+
+  """All values that are contained in given list."""
+  defense_in: [Int!]
+
+  """All values that are not contained in given list."""
+  defense_not_in: [Int!]
+
+  """All values less than the given value."""
+  defense_lt: Int
+
+  """All values less than or equal the given value."""
+  defense_lte: Int
+
+  """All values greater than the given value."""
+  defense_gt: Int
+
+  """All values greater than or equal the given value."""
+  defense_gte: Int
+  accurate: Int
+
+  """All values that are not equal to given value."""
+  accurate_not: Int
+
+  """All values that are contained in given list."""
+  accurate_in: [Int!]
+
+  """All values that are not contained in given list."""
+  accurate_not_in: [Int!]
+
+  """All values less than the given value."""
+  accurate_lt: Int
+
+  """All values less than or equal the given value."""
+  accurate_lte: Int
+
+  """All values greater than the given value."""
+  accurate_gt: Int
+
+  """All values greater than or equal the given value."""
+  accurate_gte: Int
+  cunning: Int
+
+  """All values that are not equal to given value."""
+  cunning_not: Int
+
+  """All values that are contained in given list."""
+  cunning_in: [Int!]
+
+  """All values that are not contained in given list."""
+  cunning_not_in: [Int!]
+
+  """All values less than the given value."""
+  cunning_lt: Int
+
+  """All values less than or equal the given value."""
+  cunning_lte: Int
+
+  """All values greater than the given value."""
+  cunning_gt: Int
+
+  """All values greater than or equal the given value."""
+  cunning_gte: Int
+  discreet: Int
+
+  """All values that are not equal to given value."""
+  discreet_not: Int
+
+  """All values that are contained in given list."""
+  discreet_in: [Int!]
+
+  """All values that are not contained in given list."""
+  discreet_not_in: [Int!]
+
+  """All values less than the given value."""
+  discreet_lt: Int
+
+  """All values less than or equal the given value."""
+  discreet_lte: Int
+
+  """All values greater than the given value."""
+  discreet_gt: Int
+
+  """All values greater than or equal the given value."""
+  discreet_gte: Int
+  persuasive: Int
+
+  """All values that are not equal to given value."""
+  persuasive_not: Int
+
+  """All values that are contained in given list."""
+  persuasive_in: [Int!]
+
+  """All values that are not contained in given list."""
+  persuasive_not_in: [Int!]
+
+  """All values less than the given value."""
+  persuasive_lt: Int
+
+  """All values less than or equal the given value."""
+  persuasive_lte: Int
+
+  """All values greater than the given value."""
+  persuasive_gt: Int
+
+  """All values greater than or equal the given value."""
+  persuasive_gte: Int
+  quick: Int
+
+  """All values that are not equal to given value."""
+  quick_not: Int
+
+  """All values that are contained in given list."""
+  quick_in: [Int!]
+
+  """All values that are not contained in given list."""
+  quick_not_in: [Int!]
+
+  """All values less than the given value."""
+  quick_lt: Int
+
+  """All values less than or equal the given value."""
+  quick_lte: Int
+
+  """All values greater than the given value."""
+  quick_gt: Int
+
+  """All values greater than or equal the given value."""
+  quick_gte: Int
+  resolute: Int
+
+  """All values that are not equal to given value."""
+  resolute_not: Int
+
+  """All values that are contained in given list."""
+  resolute_in: [Int!]
+
+  """All values that are not contained in given list."""
+  resolute_not_in: [Int!]
+
+  """All values less than the given value."""
+  resolute_lt: Int
+
+  """All values less than or equal the given value."""
+  resolute_lte: Int
+
+  """All values greater than the given value."""
+  resolute_gt: Int
+
+  """All values greater than or equal the given value."""
+  resolute_gte: Int
+  strong: Int
+
+  """All values that are not equal to given value."""
+  strong_not: Int
+
+  """All values that are contained in given list."""
+  strong_in: [Int!]
+
+  """All values that are not contained in given list."""
+  strong_not_in: [Int!]
+
+  """All values less than the given value."""
+  strong_lt: Int
+
+  """All values less than or equal the given value."""
+  strong_lte: Int
+
+  """All values greater than the given value."""
+  strong_gt: Int
+
+  """All values greater than or equal the given value."""
+  strong_gte: Int
+  vigilant: Int
+
+  """All values that are not equal to given value."""
+  vigilant_not: Int
+
+  """All values that are contained in given list."""
+  vigilant_in: [Int!]
+
+  """All values that are not contained in given list."""
+  vigilant_not_in: [Int!]
+
+  """All values less than the given value."""
+  vigilant_lt: Int
+
+  """All values less than or equal the given value."""
+  vigilant_lte: Int
+
+  """All values greater than the given value."""
+  vigilant_gt: Int
+
+  """All values greater than or equal the given value."""
+  vigilant_gte: Int
+  author: UserWhereInput
+  project: ProjectWhereInput
+  event: EventWhereInput
+}
+
+input CreatureWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
 
 type Event implements Node {
   id: ID!
   title: String!
+  description: String
   eventRole: EventRole!
   project(where: ProjectWhereInput): Project!
   author(where: UserWhereInput): User!
+  creatures(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creature!]
 }
 
 """A connection to a list of items."""
@@ -40,9 +931,11 @@ type EventConnection {
 
 input EventCreateInput {
   title: String!
+  description: String
   eventRole: EventRole!
   project: ProjectCreateOneWithoutEventsInput!
   author: UserCreateOneWithoutEventsInput!
+  creatures: CreatureCreateManyWithoutEventInput
 }
 
 input EventCreateManyWithoutAuthorInput {
@@ -55,16 +948,33 @@ input EventCreateManyWithoutProjectInput {
   connect: [EventWhereUniqueInput!]
 }
 
+input EventCreateOneWithoutCreaturesInput {
+  create: EventCreateWithoutCreaturesInput
+  connect: EventWhereUniqueInput
+}
+
 input EventCreateWithoutAuthorInput {
   title: String!
+  description: String
   eventRole: EventRole!
   project: ProjectCreateOneWithoutEventsInput!
+  creatures: CreatureCreateManyWithoutEventInput
+}
+
+input EventCreateWithoutCreaturesInput {
+  title: String!
+  description: String
+  eventRole: EventRole!
+  project: ProjectCreateOneWithoutEventsInput!
+  author: UserCreateOneWithoutEventsInput!
 }
 
 input EventCreateWithoutProjectInput {
   title: String!
+  description: String
   eventRole: EventRole!
   author: UserCreateOneWithoutEventsInput!
+  creatures: CreatureCreateManyWithoutEventInput
 }
 
 """An edge in a connection."""
@@ -81,6 +991,8 @@ enum EventOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  description_ASC
+  description_DESC
   eventRole_ASC
   eventRole_DESC
   updatedAt_ASC
@@ -92,13 +1004,14 @@ enum EventOrderByInput {
 type EventPreviousValues {
   id: ID!
   title: String!
+  description: String
   eventRole: EventRole!
 }
 
 enum EventRole {
   GENERIC
   QUEST
-  FIGHT
+  COMBAT
 }
 
 type EventSubscriptionPayload {
@@ -142,9 +1055,11 @@ input EventSubscriptionWhereInput {
 
 input EventUpdateInput {
   title: String
+  description: String
   eventRole: EventRole
   project: ProjectUpdateOneWithoutEventsInput
   author: UserUpdateOneWithoutEventsInput
+  creatures: CreatureUpdateManyWithoutEventInput
 }
 
 input EventUpdateManyWithoutAuthorInput {
@@ -165,16 +1080,36 @@ input EventUpdateManyWithoutProjectInput {
   upsert: [EventUpsertWithWhereUniqueWithoutProjectInput!]
 }
 
+input EventUpdateOneWithoutCreaturesInput {
+  create: EventCreateWithoutCreaturesInput
+  connect: EventWhereUniqueInput
+  delete: Boolean
+  update: EventUpdateWithoutCreaturesDataInput
+  upsert: EventUpsertWithoutCreaturesInput
+}
+
 input EventUpdateWithoutAuthorDataInput {
   title: String
+  description: String
   eventRole: EventRole
   project: ProjectUpdateOneWithoutEventsInput
+  creatures: CreatureUpdateManyWithoutEventInput
+}
+
+input EventUpdateWithoutCreaturesDataInput {
+  title: String
+  description: String
+  eventRole: EventRole
+  project: ProjectUpdateOneWithoutEventsInput
+  author: UserUpdateOneWithoutEventsInput
 }
 
 input EventUpdateWithoutProjectDataInput {
   title: String
+  description: String
   eventRole: EventRole
   author: UserUpdateOneWithoutEventsInput
+  creatures: CreatureUpdateManyWithoutEventInput
 }
 
 input EventUpdateWithWhereUniqueWithoutAuthorInput {
@@ -185,6 +1120,11 @@ input EventUpdateWithWhereUniqueWithoutAuthorInput {
 input EventUpdateWithWhereUniqueWithoutProjectInput {
   where: EventWhereUniqueInput!
   data: EventUpdateWithoutProjectDataInput!
+}
+
+input EventUpsertWithoutCreaturesInput {
+  update: EventUpdateWithoutCreaturesDataInput!
+  create: EventCreateWithoutCreaturesInput!
 }
 
 input EventUpsertWithWhereUniqueWithoutAuthorInput {
@@ -288,6 +1228,46 @@ input EventWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
   eventRole: EventRole
 
   """All values that are not equal to given value."""
@@ -300,6 +1280,9 @@ input EventWhereInput {
   eventRole_not_in: [EventRole!]
   project: ProjectWhereInput
   author: UserWhereInput
+  creatures_every: CreatureWhereInput
+  creatures_some: CreatureWhereInput
+  creatures_none: CreatureWhereInput
 }
 
 input EventWhereUniqueInput {
@@ -316,21 +1299,27 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createProject(data: ProjectCreateInput!): Project!
   createEvent(data: EventCreateInput!): Event!
+  createCreature(data: CreatureCreateInput!): Creature!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateCreature(data: CreatureUpdateInput!, where: CreatureWhereUniqueInput!): Creature
   deleteUser(where: UserWhereUniqueInput!): User
   deleteProject(where: ProjectWhereUniqueInput!): Project
   deleteEvent(where: EventWhereUniqueInput!): Event
+  deleteCreature(where: CreatureWhereUniqueInput!): Creature
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  upsertCreature(where: CreatureWhereUniqueInput!, create: CreatureCreateInput!, update: CreatureUpdateInput!): Creature!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
+  updateManyCreatures(data: CreatureUpdateInput!, where: CreatureWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyProjects(where: ProjectWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
+  deleteManyCreatures(where: CreatureWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -366,6 +1355,7 @@ type Project implements Node {
   description: String
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
   author(where: UserWhereInput): User!
+  creatures(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creature!]
 }
 
 """A connection to a list of items."""
@@ -383,11 +1373,17 @@ input ProjectCreateInput {
   description: String
   events: EventCreateManyWithoutProjectInput
   author: UserCreateOneWithoutProjectsInput!
+  creatures: CreatureCreateManyWithoutProjectInput
 }
 
 input ProjectCreateManyWithoutAuthorInput {
   create: [ProjectCreateWithoutAuthorInput!]
   connect: [ProjectWhereUniqueInput!]
+}
+
+input ProjectCreateOneWithoutCreaturesInput {
+  create: ProjectCreateWithoutCreaturesInput
+  connect: ProjectWhereUniqueInput
 }
 
 input ProjectCreateOneWithoutEventsInput {
@@ -399,12 +1395,21 @@ input ProjectCreateWithoutAuthorInput {
   title: String!
   description: String
   events: EventCreateManyWithoutProjectInput
+  creatures: CreatureCreateManyWithoutProjectInput
+}
+
+input ProjectCreateWithoutCreaturesInput {
+  title: String!
+  description: String
+  events: EventCreateManyWithoutProjectInput
+  author: UserCreateOneWithoutProjectsInput!
 }
 
 input ProjectCreateWithoutEventsInput {
   title: String!
   description: String
   author: UserCreateOneWithoutProjectsInput!
+  creatures: CreatureCreateManyWithoutProjectInput
 }
 
 """An edge in a connection."""
@@ -479,6 +1484,7 @@ input ProjectUpdateInput {
   description: String
   events: EventUpdateManyWithoutProjectInput
   author: UserUpdateOneWithoutProjectsInput
+  creatures: CreatureUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateManyWithoutAuthorInput {
@@ -488,6 +1494,14 @@ input ProjectUpdateManyWithoutAuthorInput {
   delete: [ProjectWhereUniqueInput!]
   update: [ProjectUpdateWithWhereUniqueWithoutAuthorInput!]
   upsert: [ProjectUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input ProjectUpdateOneWithoutCreaturesInput {
+  create: ProjectCreateWithoutCreaturesInput
+  connect: ProjectWhereUniqueInput
+  delete: Boolean
+  update: ProjectUpdateWithoutCreaturesDataInput
+  upsert: ProjectUpsertWithoutCreaturesInput
 }
 
 input ProjectUpdateOneWithoutEventsInput {
@@ -502,17 +1516,31 @@ input ProjectUpdateWithoutAuthorDataInput {
   title: String
   description: String
   events: EventUpdateManyWithoutProjectInput
+  creatures: CreatureUpdateManyWithoutProjectInput
+}
+
+input ProjectUpdateWithoutCreaturesDataInput {
+  title: String
+  description: String
+  events: EventUpdateManyWithoutProjectInput
+  author: UserUpdateOneWithoutProjectsInput
 }
 
 input ProjectUpdateWithoutEventsDataInput {
   title: String
   description: String
   author: UserUpdateOneWithoutProjectsInput
+  creatures: CreatureUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateWithWhereUniqueWithoutAuthorInput {
   where: ProjectWhereUniqueInput!
   data: ProjectUpdateWithoutAuthorDataInput!
+}
+
+input ProjectUpsertWithoutCreaturesInput {
+  update: ProjectUpdateWithoutCreaturesDataInput!
+  create: ProjectCreateWithoutCreaturesInput!
 }
 
 input ProjectUpsertWithoutEventsInput {
@@ -659,6 +1687,9 @@ input ProjectWhereInput {
   events_some: EventWhereInput
   events_none: EventWhereInput
   author: UserWhereInput
+  creatures_every: CreatureWhereInput
+  creatures_some: CreatureWhereInput
+  creatures_none: CreatureWhereInput
 }
 
 input ProjectWhereUniqueInput {
@@ -669,12 +1700,15 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
+  creatures(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creature]!
   user(where: UserWhereUniqueInput!): User
   project(where: ProjectWhereUniqueInput!): Project
   event(where: EventWhereUniqueInput!): Event
+  creature(where: CreatureWhereUniqueInput!): Creature
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
+  creaturesConnection(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CreatureConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -687,6 +1721,7 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
+  creature(where: CreatureSubscriptionWhereInput): CreatureSubscriptionPayload
 }
 
 type User implements Node {
@@ -696,6 +1731,7 @@ type User implements Node {
   password: String!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
+  creatures(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creature!]
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -716,6 +1752,12 @@ input UserCreateInput {
   password: String!
   events: EventCreateManyWithoutAuthorInput
   projects: ProjectCreateManyWithoutAuthorInput
+  creatures: CreatureCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneWithoutCreaturesInput {
+  create: UserCreateWithoutCreaturesInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutEventsInput {
@@ -728,11 +1770,20 @@ input UserCreateOneWithoutProjectsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutCreaturesInput {
+  username: String!
+  email: String!
+  password: String!
+  events: EventCreateManyWithoutAuthorInput
+  projects: ProjectCreateManyWithoutAuthorInput
+}
+
 input UserCreateWithoutEventsInput {
   username: String!
   email: String!
   password: String!
   projects: ProjectCreateManyWithoutAuthorInput
+  creatures: CreatureCreateManyWithoutAuthorInput
 }
 
 input UserCreateWithoutProjectsInput {
@@ -740,6 +1791,7 @@ input UserCreateWithoutProjectsInput {
   email: String!
   password: String!
   events: EventCreateManyWithoutAuthorInput
+  creatures: CreatureCreateManyWithoutAuthorInput
 }
 
 """An edge in a connection."""
@@ -820,6 +1872,15 @@ input UserUpdateInput {
   password: String
   events: EventUpdateManyWithoutAuthorInput
   projects: ProjectUpdateManyWithoutAuthorInput
+  creatures: CreatureUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateOneWithoutCreaturesInput {
+  create: UserCreateWithoutCreaturesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutCreaturesDataInput
+  upsert: UserUpsertWithoutCreaturesInput
 }
 
 input UserUpdateOneWithoutEventsInput {
@@ -838,11 +1899,20 @@ input UserUpdateOneWithoutProjectsInput {
   upsert: UserUpsertWithoutProjectsInput
 }
 
+input UserUpdateWithoutCreaturesDataInput {
+  username: String
+  email: String
+  password: String
+  events: EventUpdateManyWithoutAuthorInput
+  projects: ProjectUpdateManyWithoutAuthorInput
+}
+
 input UserUpdateWithoutEventsDataInput {
   username: String
   email: String
   password: String
   projects: ProjectUpdateManyWithoutAuthorInput
+  creatures: CreatureUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateWithoutProjectsDataInput {
@@ -850,6 +1920,12 @@ input UserUpdateWithoutProjectsDataInput {
   email: String
   password: String
   events: EventUpdateManyWithoutAuthorInput
+  creatures: CreatureUpdateManyWithoutAuthorInput
+}
+
+input UserUpsertWithoutCreaturesInput {
+  update: UserUpdateWithoutCreaturesDataInput!
+  create: UserCreateWithoutCreaturesInput!
 }
 
 input UserUpsertWithoutEventsInput {
@@ -1081,6 +2157,9 @@ input UserWhereInput {
   projects_every: ProjectWhereInput
   projects_some: ProjectWhereInput
   projects_none: ProjectWhereInput
+  creatures_every: CreatureWhereInput
+  creatures_some: CreatureWhereInput
+  creatures_none: CreatureWhereInput
 }
 
 input UserWhereUniqueInput {
