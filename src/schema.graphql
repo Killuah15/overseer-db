@@ -21,8 +21,8 @@ type Query {
 }
 
 type Mutation {
-  signup(data: SignupInput): AuthPayload!
-  login(data: LoginInput): AuthPayload!
+  signup(data: SignupInput!): AuthPayload!
+  login(data: LoginInput!): AuthPayload!
 }
 
 #----------INPUT----------
