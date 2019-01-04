@@ -1,4 +1,4 @@
-#import Event,Project,EventRole from "./generated/prisma.graphql"
+#import Event,Project,Creature,EventRole from "./generated/prisma.graphql"
 #----------TYPES----------
 type User {
   id: ID!
@@ -38,4 +38,4 @@ input LoginInput {
   password: String!
 }
 
-#----------ENUMS----------
+#----------ENUMS----------           -> EventRole wird importiert, siehe Zeile 1
