@@ -27,5 +27,9 @@
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
     "prisma-binding": "^2.1.6"
+  },
+  "devDependencies": {
+    "heroku": "^7.19.4",
+    "prisma": "^1.23.4"
   }
 }

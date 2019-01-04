@@ -54,4 +54,6 @@ const Mutation = {
   }
 }
 
+//NOTE: mit request.get('Authorization') bekommt man dann den mitgelieferten Auth token! :)
+
 export default Mutation
