@@ -53,7 +53,7 @@ input CreatureInput {
   name: String
   race: String!
   shadow: String
-  conditions: ConditionsInput
+  Conditions: ConditionsInput
   attributes: AttributesInput
 }
 

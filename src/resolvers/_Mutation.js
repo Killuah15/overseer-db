@@ -122,7 +122,7 @@ const Mutation = {
       corruption,
       corruptionThreshold,
       corruptionPermanent
-    } = data.conditions
+    } = data.Conditions
 
     //destructure attributes input
     const {
