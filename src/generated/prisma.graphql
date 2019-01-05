@@ -1,5 +1,13 @@
 # source: https://overseer-db.herokuapp.com/overseer-db/dev
-# timestamp: Fri Jan 04 2019 19:56:39 GMT+0100 (GMT+01:00)
+# timestamp: Sat Jan 05 2019 16:39:45 GMT+0100 (GMT+01:00)
+
+type AggregateAttributes {
+  count: Int!
+}
+
+type AggregateConditions {
+  count: Int!
+}
 
 type AggregateCreature {
   count: Int!
@@ -17,9 +25,757 @@ type AggregateUser {
   count: Int!
 }
 
+type Attributes implements Node {
+  id: ID!
+  creature(where: CreatureWhereInput): Creature!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  defense: Int!
+}
+
+"""A connection to a list of items."""
+type AttributesConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AttributesEdge]!
+  aggregate: AggregateAttributes!
+}
+
+input AttributesCreateInput {
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  defense: Int!
+  creature: CreatureCreateOneWithoutAttributesInput!
+}
+
+input AttributesCreateOneWithoutCreatureInput {
+  create: AttributesCreateWithoutCreatureInput
+  connect: AttributesWhereUniqueInput
+}
+
+input AttributesCreateWithoutCreatureInput {
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  defense: Int!
+}
+
+"""An edge in a connection."""
+type AttributesEdge {
+  """The item at the end of the edge."""
+  node: Attributes!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AttributesOrderByInput {
+  id_ASC
+  id_DESC
+  accurate_ASC
+  accurate_DESC
+  cunning_ASC
+  cunning_DESC
+  discreet_ASC
+  discreet_DESC
+  persuasive_ASC
+  persuasive_DESC
+  quick_ASC
+  quick_DESC
+  resolute_ASC
+  resolute_DESC
+  strong_ASC
+  strong_DESC
+  vigilant_ASC
+  vigilant_DESC
+  defense_ASC
+  defense_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AttributesPreviousValues {
+  id: ID!
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  defense: Int!
+}
+
+type AttributesSubscriptionPayload {
+  mutation: MutationType!
+  node: Attributes
+  updatedFields: [String!]
+  previousValues: AttributesPreviousValues
+}
+
+input AttributesSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AttributesSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AttributesSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AttributesSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AttributesWhereInput
+}
+
+input AttributesUpdateInput {
+  accurate: Int
+  cunning: Int
+  discreet: Int
+  persuasive: Int
+  quick: Int
+  resolute: Int
+  strong: Int
+  vigilant: Int
+  defense: Int
+  creature: CreatureUpdateOneWithoutAttributesInput
+}
+
+input AttributesUpdateOneWithoutCreatureInput {
+  create: AttributesCreateWithoutCreatureInput
+  connect: AttributesWhereUniqueInput
+  delete: Boolean
+  update: AttributesUpdateWithoutCreatureDataInput
+  upsert: AttributesUpsertWithoutCreatureInput
+}
+
+input AttributesUpdateWithoutCreatureDataInput {
+  accurate: Int
+  cunning: Int
+  discreet: Int
+  persuasive: Int
+  quick: Int
+  resolute: Int
+  strong: Int
+  vigilant: Int
+  defense: Int
+}
+
+input AttributesUpsertWithoutCreatureInput {
+  update: AttributesUpdateWithoutCreatureDataInput!
+  create: AttributesCreateWithoutCreatureInput!
+}
+
+input AttributesWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AttributesWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AttributesWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AttributesWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  accurate: Int
+
+  """All values that are not equal to given value."""
+  accurate_not: Int
+
+  """All values that are contained in given list."""
+  accurate_in: [Int!]
+
+  """All values that are not contained in given list."""
+  accurate_not_in: [Int!]
+
+  """All values less than the given value."""
+  accurate_lt: Int
+
+  """All values less than or equal the given value."""
+  accurate_lte: Int
+
+  """All values greater than the given value."""
+  accurate_gt: Int
+
+  """All values greater than or equal the given value."""
+  accurate_gte: Int
+  cunning: Int
+
+  """All values that are not equal to given value."""
+  cunning_not: Int
+
+  """All values that are contained in given list."""
+  cunning_in: [Int!]
+
+  """All values that are not contained in given list."""
+  cunning_not_in: [Int!]
+
+  """All values less than the given value."""
+  cunning_lt: Int
+
+  """All values less than or equal the given value."""
+  cunning_lte: Int
+
+  """All values greater than the given value."""
+  cunning_gt: Int
+
+  """All values greater than or equal the given value."""
+  cunning_gte: Int
+  discreet: Int
+
+  """All values that are not equal to given value."""
+  discreet_not: Int
+
+  """All values that are contained in given list."""
+  discreet_in: [Int!]
+
+  """All values that are not contained in given list."""
+  discreet_not_in: [Int!]
+
+  """All values less than the given value."""
+  discreet_lt: Int
+
+  """All values less than or equal the given value."""
+  discreet_lte: Int
+
+  """All values greater than the given value."""
+  discreet_gt: Int
+
+  """All values greater than or equal the given value."""
+  discreet_gte: Int
+  persuasive: Int
+
+  """All values that are not equal to given value."""
+  persuasive_not: Int
+
+  """All values that are contained in given list."""
+  persuasive_in: [Int!]
+
+  """All values that are not contained in given list."""
+  persuasive_not_in: [Int!]
+
+  """All values less than the given value."""
+  persuasive_lt: Int
+
+  """All values less than or equal the given value."""
+  persuasive_lte: Int
+
+  """All values greater than the given value."""
+  persuasive_gt: Int
+
+  """All values greater than or equal the given value."""
+  persuasive_gte: Int
+  quick: Int
+
+  """All values that are not equal to given value."""
+  quick_not: Int
+
+  """All values that are contained in given list."""
+  quick_in: [Int!]
+
+  """All values that are not contained in given list."""
+  quick_not_in: [Int!]
+
+  """All values less than the given value."""
+  quick_lt: Int
+
+  """All values less than or equal the given value."""
+  quick_lte: Int
+
+  """All values greater than the given value."""
+  quick_gt: Int
+
+  """All values greater than or equal the given value."""
+  quick_gte: Int
+  resolute: Int
+
+  """All values that are not equal to given value."""
+  resolute_not: Int
+
+  """All values that are contained in given list."""
+  resolute_in: [Int!]
+
+  """All values that are not contained in given list."""
+  resolute_not_in: [Int!]
+
+  """All values less than the given value."""
+  resolute_lt: Int
+
+  """All values less than or equal the given value."""
+  resolute_lte: Int
+
+  """All values greater than the given value."""
+  resolute_gt: Int
+
+  """All values greater than or equal the given value."""
+  resolute_gte: Int
+  strong: Int
+
+  """All values that are not equal to given value."""
+  strong_not: Int
+
+  """All values that are contained in given list."""
+  strong_in: [Int!]
+
+  """All values that are not contained in given list."""
+  strong_not_in: [Int!]
+
+  """All values less than the given value."""
+  strong_lt: Int
+
+  """All values less than or equal the given value."""
+  strong_lte: Int
+
+  """All values greater than the given value."""
+  strong_gt: Int
+
+  """All values greater than or equal the given value."""
+  strong_gte: Int
+  vigilant: Int
+
+  """All values that are not equal to given value."""
+  vigilant_not: Int
+
+  """All values that are contained in given list."""
+  vigilant_in: [Int!]
+
+  """All values that are not contained in given list."""
+  vigilant_not_in: [Int!]
+
+  """All values less than the given value."""
+  vigilant_lt: Int
+
+  """All values less than or equal the given value."""
+  vigilant_lte: Int
+
+  """All values greater than the given value."""
+  vigilant_gt: Int
+
+  """All values greater than or equal the given value."""
+  vigilant_gte: Int
+  defense: Int
+
+  """All values that are not equal to given value."""
+  defense_not: Int
+
+  """All values that are contained in given list."""
+  defense_in: [Int!]
+
+  """All values that are not contained in given list."""
+  defense_not_in: [Int!]
+
+  """All values less than the given value."""
+  defense_lt: Int
+
+  """All values less than or equal the given value."""
+  defense_lte: Int
+
+  """All values greater than the given value."""
+  defense_gt: Int
+
+  """All values greater than or equal the given value."""
+  defense_gte: Int
+  creature: CreatureWhereInput
+}
+
+input AttributesWhereUniqueInput {
+  id: ID
+}
+
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
+}
+
+type Conditions implements Node {
+  id: ID!
+  creature(where: CreatureWhereInput): Creature!
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+}
+
+"""A connection to a list of items."""
+type ConditionsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ConditionsEdge]!
+  aggregate: AggregateConditions!
+}
+
+input ConditionsCreateInput {
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+  creature: CreatureCreateOneWithoutConditionsInput!
+}
+
+input ConditionsCreateOneWithoutCreatureInput {
+  create: ConditionsCreateWithoutCreatureInput
+  connect: ConditionsWhereUniqueInput
+}
+
+input ConditionsCreateWithoutCreatureInput {
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+}
+
+"""An edge in a connection."""
+type ConditionsEdge {
+  """The item at the end of the edge."""
+  node: Conditions!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ConditionsOrderByInput {
+  id_ASC
+  id_DESC
+  toughness_ASC
+  toughness_DESC
+  painThreshold_ASC
+  painThreshold_DESC
+  corruption_ASC
+  corruption_DESC
+  corruptionThreshold_ASC
+  corruptionThreshold_DESC
+  corruptionPermanent_ASC
+  corruptionPermanent_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ConditionsPreviousValues {
+  id: ID!
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
+}
+
+type ConditionsSubscriptionPayload {
+  mutation: MutationType!
+  node: Conditions
+  updatedFields: [String!]
+  previousValues: ConditionsPreviousValues
+}
+
+input ConditionsSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ConditionsSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ConditionsSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ConditionsSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ConditionsWhereInput
+}
+
+input ConditionsUpdateInput {
+  toughness: Int
+  painThreshold: Int
+  corruption: Int
+  corruptionThreshold: Int
+  corruptionPermanent: Int
+  creature: CreatureUpdateOneWithoutConditionsInput
+}
+
+input ConditionsUpdateOneWithoutCreatureInput {
+  create: ConditionsCreateWithoutCreatureInput
+  connect: ConditionsWhereUniqueInput
+  delete: Boolean
+  update: ConditionsUpdateWithoutCreatureDataInput
+  upsert: ConditionsUpsertWithoutCreatureInput
+}
+
+input ConditionsUpdateWithoutCreatureDataInput {
+  toughness: Int
+  painThreshold: Int
+  corruption: Int
+  corruptionThreshold: Int
+  corruptionPermanent: Int
+}
+
+input ConditionsUpsertWithoutCreatureInput {
+  update: ConditionsUpdateWithoutCreatureDataInput!
+  create: ConditionsCreateWithoutCreatureInput!
+}
+
+input ConditionsWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ConditionsWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ConditionsWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ConditionsWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  toughness: Int
+
+  """All values that are not equal to given value."""
+  toughness_not: Int
+
+  """All values that are contained in given list."""
+  toughness_in: [Int!]
+
+  """All values that are not contained in given list."""
+  toughness_not_in: [Int!]
+
+  """All values less than the given value."""
+  toughness_lt: Int
+
+  """All values less than or equal the given value."""
+  toughness_lte: Int
+
+  """All values greater than the given value."""
+  toughness_gt: Int
+
+  """All values greater than or equal the given value."""
+  toughness_gte: Int
+  painThreshold: Int
+
+  """All values that are not equal to given value."""
+  painThreshold_not: Int
+
+  """All values that are contained in given list."""
+  painThreshold_in: [Int!]
+
+  """All values that are not contained in given list."""
+  painThreshold_not_in: [Int!]
+
+  """All values less than the given value."""
+  painThreshold_lt: Int
+
+  """All values less than or equal the given value."""
+  painThreshold_lte: Int
+
+  """All values greater than the given value."""
+  painThreshold_gt: Int
+
+  """All values greater than or equal the given value."""
+  painThreshold_gte: Int
+  corruption: Int
+
+  """All values that are not equal to given value."""
+  corruption_not: Int
+
+  """All values that are contained in given list."""
+  corruption_in: [Int!]
+
+  """All values that are not contained in given list."""
+  corruption_not_in: [Int!]
+
+  """All values less than the given value."""
+  corruption_lt: Int
+
+  """All values less than or equal the given value."""
+  corruption_lte: Int
+
+  """All values greater than the given value."""
+  corruption_gt: Int
+
+  """All values greater than or equal the given value."""
+  corruption_gte: Int
+  corruptionThreshold: Int
+
+  """All values that are not equal to given value."""
+  corruptionThreshold_not: Int
+
+  """All values that are contained in given list."""
+  corruptionThreshold_in: [Int!]
+
+  """All values that are not contained in given list."""
+  corruptionThreshold_not_in: [Int!]
+
+  """All values less than the given value."""
+  corruptionThreshold_lt: Int
+
+  """All values less than or equal the given value."""
+  corruptionThreshold_lte: Int
+
+  """All values greater than the given value."""
+  corruptionThreshold_gt: Int
+
+  """All values greater than or equal the given value."""
+  corruptionThreshold_gte: Int
+  corruptionPermanent: Int
+
+  """All values that are not equal to given value."""
+  corruptionPermanent_not: Int
+
+  """All values that are contained in given list."""
+  corruptionPermanent_in: [Int!]
+
+  """All values that are not contained in given list."""
+  corruptionPermanent_not_in: [Int!]
+
+  """All values less than the given value."""
+  corruptionPermanent_lt: Int
+
+  """All values less than or equal the given value."""
+  corruptionPermanent_lte: Int
+
+  """All values greater than the given value."""
+  corruptionPermanent_gt: Int
+
+  """All values greater than or equal the given value."""
+  corruptionPermanent_gte: Int
+  creature: CreatureWhereInput
+}
+
+input ConditionsWhereUniqueInput {
+  id: ID
 }
 
 type Creature implements Node {
@@ -30,20 +786,8 @@ type Creature implements Node {
   name: String
   race: String!
   shadow: String
-  toughness: Int!
-  painThreshold: Int!
-  corruption: Int!
-  corruptionThreshold: Int!
-  corruptionPermanent: Int!
-  defense: Int!
-  accurate: Int!
-  cunning: Int!
-  discreet: Int!
-  persuasive: Int!
-  quick: Int!
-  resolute: Int!
-  strong: Int!
-  vigilant: Int!
+  Conditions(where: ConditionsWhereInput): Conditions!
+  attributes(where: AttributesWhereInput): Attributes!
 }
 
 """A connection to a list of items."""
@@ -60,23 +804,11 @@ input CreatureCreateInput {
   name: String
   race: String!
   shadow: String
-  toughness: Int!
-  painThreshold: Int!
-  corruption: Int!
-  corruptionThreshold: Int!
-  corruptionPermanent: Int!
-  defense: Int!
-  accurate: Int!
-  cunning: Int!
-  discreet: Int!
-  persuasive: Int!
-  quick: Int!
-  resolute: Int!
-  strong: Int!
-  vigilant: Int!
   author: UserCreateOneWithoutCreaturesInput!
   project: ProjectCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
+  Conditions: ConditionsCreateOneWithoutCreatureInput!
+  attributes: AttributesCreateOneWithoutCreatureInput!
 }
 
 input CreatureCreateManyWithoutAuthorInput {
@@ -94,70 +826,64 @@ input CreatureCreateManyWithoutProjectInput {
   connect: [CreatureWhereUniqueInput!]
 }
 
+input CreatureCreateOneWithoutAttributesInput {
+  create: CreatureCreateWithoutAttributesInput
+  connect: CreatureWhereUniqueInput
+}
+
+input CreatureCreateOneWithoutConditionsInput {
+  create: CreatureCreateWithoutConditionsInput
+  connect: CreatureWhereUniqueInput
+}
+
+input CreatureCreateWithoutAttributesInput {
+  name: String
+  race: String!
+  shadow: String
+  author: UserCreateOneWithoutCreaturesInput!
+  project: ProjectCreateOneWithoutCreaturesInput!
+  event: EventCreateOneWithoutCreaturesInput!
+  Conditions: ConditionsCreateOneWithoutCreatureInput!
+}
+
 input CreatureCreateWithoutAuthorInput {
   name: String
   race: String!
   shadow: String
-  toughness: Int!
-  painThreshold: Int!
-  corruption: Int!
-  corruptionThreshold: Int!
-  corruptionPermanent: Int!
-  defense: Int!
-  accurate: Int!
-  cunning: Int!
-  discreet: Int!
-  persuasive: Int!
-  quick: Int!
-  resolute: Int!
-  strong: Int!
-  vigilant: Int!
   project: ProjectCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
+  Conditions: ConditionsCreateOneWithoutCreatureInput!
+  attributes: AttributesCreateOneWithoutCreatureInput!
+}
+
+input CreatureCreateWithoutConditionsInput {
+  name: String
+  race: String!
+  shadow: String
+  author: UserCreateOneWithoutCreaturesInput!
+  project: ProjectCreateOneWithoutCreaturesInput!
+  event: EventCreateOneWithoutCreaturesInput!
+  attributes: AttributesCreateOneWithoutCreatureInput!
 }
 
 input CreatureCreateWithoutEventInput {
   name: String
   race: String!
   shadow: String
-  toughness: Int!
-  painThreshold: Int!
-  corruption: Int!
-  corruptionThreshold: Int!
-  corruptionPermanent: Int!
-  defense: Int!
-  accurate: Int!
-  cunning: Int!
-  discreet: Int!
-  persuasive: Int!
-  quick: Int!
-  resolute: Int!
-  strong: Int!
-  vigilant: Int!
   author: UserCreateOneWithoutCreaturesInput!
   project: ProjectCreateOneWithoutCreaturesInput!
+  Conditions: ConditionsCreateOneWithoutCreatureInput!
+  attributes: AttributesCreateOneWithoutCreatureInput!
 }
 
 input CreatureCreateWithoutProjectInput {
   name: String
   race: String!
   shadow: String
-  toughness: Int!
-  painThreshold: Int!
-  corruption: Int!
-  corruptionThreshold: Int!
-  corruptionPermanent: Int!
-  defense: Int!
-  accurate: Int!
-  cunning: Int!
-  discreet: Int!
-  persuasive: Int!
-  quick: Int!
-  resolute: Int!
-  strong: Int!
-  vigilant: Int!
   author: UserCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
+  Conditions: ConditionsCreateOneWithoutCreatureInput!
+  attributes: AttributesCreateOneWithoutCreatureInput!
 }
 
 """An edge in a connection."""
@@ -178,34 +904,6 @@ enum CreatureOrderByInput {
   race_DESC
   shadow_ASC
   shadow_DESC
-  toughness_ASC
-  toughness_DESC
-  painThreshold_ASC
-  painThreshold_DESC
-  corruption_ASC
-  corruption_DESC
-  corruptionThreshold_ASC
-  corruptionThreshold_DESC
-  corruptionPermanent_ASC
-  corruptionPermanent_DESC
-  defense_ASC
-  defense_DESC
-  accurate_ASC
-  accurate_DESC
-  cunning_ASC
-  cunning_DESC
-  discreet_ASC
-  discreet_DESC
-  persuasive_ASC
-  persuasive_DESC
-  quick_ASC
-  quick_DESC
-  resolute_ASC
-  resolute_DESC
-  strong_ASC
-  strong_DESC
-  vigilant_ASC
-  vigilant_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -217,20 +915,6 @@ type CreaturePreviousValues {
   name: String
   race: String!
   shadow: String
-  toughness: Int!
-  painThreshold: Int!
-  corruption: Int!
-  corruptionThreshold: Int!
-  corruptionPermanent: Int!
-  defense: Int!
-  accurate: Int!
-  cunning: Int!
-  discreet: Int!
-  persuasive: Int!
-  quick: Int!
-  resolute: Int!
-  strong: Int!
-  vigilant: Int!
 }
 
 type CreatureSubscriptionPayload {
@@ -276,23 +960,11 @@ input CreatureUpdateInput {
   name: String
   race: String
   shadow: String
-  toughness: Int
-  painThreshold: Int
-  corruption: Int
-  corruptionThreshold: Int
-  corruptionPermanent: Int
-  defense: Int
-  accurate: Int
-  cunning: Int
-  discreet: Int
-  persuasive: Int
-  quick: Int
-  resolute: Int
-  strong: Int
-  vigilant: Int
   author: UserUpdateOneWithoutCreaturesInput
   project: ProjectUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
+  Conditions: ConditionsUpdateOneWithoutCreatureInput
+  attributes: AttributesUpdateOneWithoutCreatureInput
 }
 
 input CreatureUpdateManyWithoutAuthorInput {
@@ -322,70 +994,70 @@ input CreatureUpdateManyWithoutProjectInput {
   upsert: [CreatureUpsertWithWhereUniqueWithoutProjectInput!]
 }
 
+input CreatureUpdateOneWithoutAttributesInput {
+  create: CreatureCreateWithoutAttributesInput
+  connect: CreatureWhereUniqueInput
+  delete: Boolean
+  update: CreatureUpdateWithoutAttributesDataInput
+  upsert: CreatureUpsertWithoutAttributesInput
+}
+
+input CreatureUpdateOneWithoutConditionsInput {
+  create: CreatureCreateWithoutConditionsInput
+  connect: CreatureWhereUniqueInput
+  delete: Boolean
+  update: CreatureUpdateWithoutConditionsDataInput
+  upsert: CreatureUpsertWithoutConditionsInput
+}
+
+input CreatureUpdateWithoutAttributesDataInput {
+  name: String
+  race: String
+  shadow: String
+  author: UserUpdateOneWithoutCreaturesInput
+  project: ProjectUpdateOneWithoutCreaturesInput
+  event: EventUpdateOneWithoutCreaturesInput
+  Conditions: ConditionsUpdateOneWithoutCreatureInput
+}
+
 input CreatureUpdateWithoutAuthorDataInput {
   name: String
   race: String
   shadow: String
-  toughness: Int
-  painThreshold: Int
-  corruption: Int
-  corruptionThreshold: Int
-  corruptionPermanent: Int
-  defense: Int
-  accurate: Int
-  cunning: Int
-  discreet: Int
-  persuasive: Int
-  quick: Int
-  resolute: Int
-  strong: Int
-  vigilant: Int
   project: ProjectUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
+  Conditions: ConditionsUpdateOneWithoutCreatureInput
+  attributes: AttributesUpdateOneWithoutCreatureInput
+}
+
+input CreatureUpdateWithoutConditionsDataInput {
+  name: String
+  race: String
+  shadow: String
+  author: UserUpdateOneWithoutCreaturesInput
+  project: ProjectUpdateOneWithoutCreaturesInput
+  event: EventUpdateOneWithoutCreaturesInput
+  attributes: AttributesUpdateOneWithoutCreatureInput
 }
 
 input CreatureUpdateWithoutEventDataInput {
   name: String
   race: String
   shadow: String
-  toughness: Int
-  painThreshold: Int
-  corruption: Int
-  corruptionThreshold: Int
-  corruptionPermanent: Int
-  defense: Int
-  accurate: Int
-  cunning: Int
-  discreet: Int
-  persuasive: Int
-  quick: Int
-  resolute: Int
-  strong: Int
-  vigilant: Int
   author: UserUpdateOneWithoutCreaturesInput
   project: ProjectUpdateOneWithoutCreaturesInput
+  Conditions: ConditionsUpdateOneWithoutCreatureInput
+  attributes: AttributesUpdateOneWithoutCreatureInput
 }
 
 input CreatureUpdateWithoutProjectDataInput {
   name: String
   race: String
   shadow: String
-  toughness: Int
-  painThreshold: Int
-  corruption: Int
-  corruptionThreshold: Int
-  corruptionPermanent: Int
-  defense: Int
-  accurate: Int
-  cunning: Int
-  discreet: Int
-  persuasive: Int
-  quick: Int
-  resolute: Int
-  strong: Int
-  vigilant: Int
   author: UserUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
+  Conditions: ConditionsUpdateOneWithoutCreatureInput
+  attributes: AttributesUpdateOneWithoutCreatureInput
 }
 
 input CreatureUpdateWithWhereUniqueWithoutAuthorInput {
@@ -401,6 +1073,16 @@ input CreatureUpdateWithWhereUniqueWithoutEventInput {
 input CreatureUpdateWithWhereUniqueWithoutProjectInput {
   where: CreatureWhereUniqueInput!
   data: CreatureUpdateWithoutProjectDataInput!
+}
+
+input CreatureUpsertWithoutAttributesInput {
+  update: CreatureUpdateWithoutAttributesDataInput!
+  create: CreatureCreateWithoutAttributesInput!
+}
+
+input CreatureUpsertWithoutConditionsInput {
+  update: CreatureUpdateWithoutConditionsDataInput!
+  create: CreatureCreateWithoutConditionsInput!
 }
 
 input CreatureUpsertWithWhereUniqueWithoutAuthorInput {
@@ -590,317 +1272,11 @@ input CreatureWhereInput {
 
   """All values not ending with the given string."""
   shadow_not_ends_with: String
-  toughness: Int
-
-  """All values that are not equal to given value."""
-  toughness_not: Int
-
-  """All values that are contained in given list."""
-  toughness_in: [Int!]
-
-  """All values that are not contained in given list."""
-  toughness_not_in: [Int!]
-
-  """All values less than the given value."""
-  toughness_lt: Int
-
-  """All values less than or equal the given value."""
-  toughness_lte: Int
-
-  """All values greater than the given value."""
-  toughness_gt: Int
-
-  """All values greater than or equal the given value."""
-  toughness_gte: Int
-  painThreshold: Int
-
-  """All values that are not equal to given value."""
-  painThreshold_not: Int
-
-  """All values that are contained in given list."""
-  painThreshold_in: [Int!]
-
-  """All values that are not contained in given list."""
-  painThreshold_not_in: [Int!]
-
-  """All values less than the given value."""
-  painThreshold_lt: Int
-
-  """All values less than or equal the given value."""
-  painThreshold_lte: Int
-
-  """All values greater than the given value."""
-  painThreshold_gt: Int
-
-  """All values greater than or equal the given value."""
-  painThreshold_gte: Int
-  corruption: Int
-
-  """All values that are not equal to given value."""
-  corruption_not: Int
-
-  """All values that are contained in given list."""
-  corruption_in: [Int!]
-
-  """All values that are not contained in given list."""
-  corruption_not_in: [Int!]
-
-  """All values less than the given value."""
-  corruption_lt: Int
-
-  """All values less than or equal the given value."""
-  corruption_lte: Int
-
-  """All values greater than the given value."""
-  corruption_gt: Int
-
-  """All values greater than or equal the given value."""
-  corruption_gte: Int
-  corruptionThreshold: Int
-
-  """All values that are not equal to given value."""
-  corruptionThreshold_not: Int
-
-  """All values that are contained in given list."""
-  corruptionThreshold_in: [Int!]
-
-  """All values that are not contained in given list."""
-  corruptionThreshold_not_in: [Int!]
-
-  """All values less than the given value."""
-  corruptionThreshold_lt: Int
-
-  """All values less than or equal the given value."""
-  corruptionThreshold_lte: Int
-
-  """All values greater than the given value."""
-  corruptionThreshold_gt: Int
-
-  """All values greater than or equal the given value."""
-  corruptionThreshold_gte: Int
-  corruptionPermanent: Int
-
-  """All values that are not equal to given value."""
-  corruptionPermanent_not: Int
-
-  """All values that are contained in given list."""
-  corruptionPermanent_in: [Int!]
-
-  """All values that are not contained in given list."""
-  corruptionPermanent_not_in: [Int!]
-
-  """All values less than the given value."""
-  corruptionPermanent_lt: Int
-
-  """All values less than or equal the given value."""
-  corruptionPermanent_lte: Int
-
-  """All values greater than the given value."""
-  corruptionPermanent_gt: Int
-
-  """All values greater than or equal the given value."""
-  corruptionPermanent_gte: Int
-  defense: Int
-
-  """All values that are not equal to given value."""
-  defense_not: Int
-
-  """All values that are contained in given list."""
-  defense_in: [Int!]
-
-  """All values that are not contained in given list."""
-  defense_not_in: [Int!]
-
-  """All values less than the given value."""
-  defense_lt: Int
-
-  """All values less than or equal the given value."""
-  defense_lte: Int
-
-  """All values greater than the given value."""
-  defense_gt: Int
-
-  """All values greater than or equal the given value."""
-  defense_gte: Int
-  accurate: Int
-
-  """All values that are not equal to given value."""
-  accurate_not: Int
-
-  """All values that are contained in given list."""
-  accurate_in: [Int!]
-
-  """All values that are not contained in given list."""
-  accurate_not_in: [Int!]
-
-  """All values less than the given value."""
-  accurate_lt: Int
-
-  """All values less than or equal the given value."""
-  accurate_lte: Int
-
-  """All values greater than the given value."""
-  accurate_gt: Int
-
-  """All values greater than or equal the given value."""
-  accurate_gte: Int
-  cunning: Int
-
-  """All values that are not equal to given value."""
-  cunning_not: Int
-
-  """All values that are contained in given list."""
-  cunning_in: [Int!]
-
-  """All values that are not contained in given list."""
-  cunning_not_in: [Int!]
-
-  """All values less than the given value."""
-  cunning_lt: Int
-
-  """All values less than or equal the given value."""
-  cunning_lte: Int
-
-  """All values greater than the given value."""
-  cunning_gt: Int
-
-  """All values greater than or equal the given value."""
-  cunning_gte: Int
-  discreet: Int
-
-  """All values that are not equal to given value."""
-  discreet_not: Int
-
-  """All values that are contained in given list."""
-  discreet_in: [Int!]
-
-  """All values that are not contained in given list."""
-  discreet_not_in: [Int!]
-
-  """All values less than the given value."""
-  discreet_lt: Int
-
-  """All values less than or equal the given value."""
-  discreet_lte: Int
-
-  """All values greater than the given value."""
-  discreet_gt: Int
-
-  """All values greater than or equal the given value."""
-  discreet_gte: Int
-  persuasive: Int
-
-  """All values that are not equal to given value."""
-  persuasive_not: Int
-
-  """All values that are contained in given list."""
-  persuasive_in: [Int!]
-
-  """All values that are not contained in given list."""
-  persuasive_not_in: [Int!]
-
-  """All values less than the given value."""
-  persuasive_lt: Int
-
-  """All values less than or equal the given value."""
-  persuasive_lte: Int
-
-  """All values greater than the given value."""
-  persuasive_gt: Int
-
-  """All values greater than or equal the given value."""
-  persuasive_gte: Int
-  quick: Int
-
-  """All values that are not equal to given value."""
-  quick_not: Int
-
-  """All values that are contained in given list."""
-  quick_in: [Int!]
-
-  """All values that are not contained in given list."""
-  quick_not_in: [Int!]
-
-  """All values less than the given value."""
-  quick_lt: Int
-
-  """All values less than or equal the given value."""
-  quick_lte: Int
-
-  """All values greater than the given value."""
-  quick_gt: Int
-
-  """All values greater than or equal the given value."""
-  quick_gte: Int
-  resolute: Int
-
-  """All values that are not equal to given value."""
-  resolute_not: Int
-
-  """All values that are contained in given list."""
-  resolute_in: [Int!]
-
-  """All values that are not contained in given list."""
-  resolute_not_in: [Int!]
-
-  """All values less than the given value."""
-  resolute_lt: Int
-
-  """All values less than or equal the given value."""
-  resolute_lte: Int
-
-  """All values greater than the given value."""
-  resolute_gt: Int
-
-  """All values greater than or equal the given value."""
-  resolute_gte: Int
-  strong: Int
-
-  """All values that are not equal to given value."""
-  strong_not: Int
-
-  """All values that are contained in given list."""
-  strong_in: [Int!]
-
-  """All values that are not contained in given list."""
-  strong_not_in: [Int!]
-
-  """All values less than the given value."""
-  strong_lt: Int
-
-  """All values less than or equal the given value."""
-  strong_lte: Int
-
-  """All values greater than the given value."""
-  strong_gt: Int
-
-  """All values greater than or equal the given value."""
-  strong_gte: Int
-  vigilant: Int
-
-  """All values that are not equal to given value."""
-  vigilant_not: Int
-
-  """All values that are contained in given list."""
-  vigilant_in: [Int!]
-
-  """All values that are not contained in given list."""
-  vigilant_not_in: [Int!]
-
-  """All values less than the given value."""
-  vigilant_lt: Int
-
-  """All values less than or equal the given value."""
-  vigilant_lte: Int
-
-  """All values greater than the given value."""
-  vigilant_gt: Int
-
-  """All values greater than or equal the given value."""
-  vigilant_gte: Int
   author: UserWhereInput
   project: ProjectWhereInput
   event: EventWhereInput
+  Conditions: ConditionsWhereInput
+  attributes: AttributesWhereInput
 }
 
 input CreatureWhereUniqueInput {
@@ -1300,26 +1676,38 @@ type Mutation {
   createProject(data: ProjectCreateInput!): Project!
   createEvent(data: EventCreateInput!): Event!
   createCreature(data: CreatureCreateInput!): Creature!
+  createAttributes(data: AttributesCreateInput!): Attributes!
+  createConditions(data: ConditionsCreateInput!): Conditions!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
   updateCreature(data: CreatureUpdateInput!, where: CreatureWhereUniqueInput!): Creature
+  updateAttributes(data: AttributesUpdateInput!, where: AttributesWhereUniqueInput!): Attributes
+  updateConditions(data: ConditionsUpdateInput!, where: ConditionsWhereUniqueInput!): Conditions
   deleteUser(where: UserWhereUniqueInput!): User
   deleteProject(where: ProjectWhereUniqueInput!): Project
   deleteEvent(where: EventWhereUniqueInput!): Event
   deleteCreature(where: CreatureWhereUniqueInput!): Creature
+  deleteAttributes(where: AttributesWhereUniqueInput!): Attributes
+  deleteConditions(where: ConditionsWhereUniqueInput!): Conditions
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
   upsertCreature(where: CreatureWhereUniqueInput!, create: CreatureCreateInput!, update: CreatureUpdateInput!): Creature!
+  upsertAttributes(where: AttributesWhereUniqueInput!, create: AttributesCreateInput!, update: AttributesUpdateInput!): Attributes!
+  upsertConditions(where: ConditionsWhereUniqueInput!, create: ConditionsCreateInput!, update: ConditionsUpdateInput!): Conditions!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
   updateManyCreatures(data: CreatureUpdateInput!, where: CreatureWhereInput): BatchPayload!
+  updateManyAttributeses(data: AttributesUpdateInput!, where: AttributesWhereInput): BatchPayload!
+  updateManyConditionses(data: ConditionsUpdateInput!, where: ConditionsWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyProjects(where: ProjectWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
   deleteManyCreatures(where: CreatureWhereInput): BatchPayload!
+  deleteManyAttributeses(where: AttributesWhereInput): BatchPayload!
+  deleteManyConditionses(where: ConditionsWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1701,14 +2089,20 @@ type Query {
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
   creatures(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creature]!
+  attributeses(where: AttributesWhereInput, orderBy: AttributesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Attributes]!
+  conditionses(where: ConditionsWhereInput, orderBy: ConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Conditions]!
   user(where: UserWhereUniqueInput!): User
   project(where: ProjectWhereUniqueInput!): Project
   event(where: EventWhereUniqueInput!): Event
   creature(where: CreatureWhereUniqueInput!): Creature
+  attributes(where: AttributesWhereUniqueInput!): Attributes
+  conditions(where: ConditionsWhereUniqueInput!): Conditions
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
   creaturesConnection(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CreatureConnection!
+  attributesesConnection(where: AttributesWhereInput, orderBy: AttributesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AttributesConnection!
+  conditionsesConnection(where: ConditionsWhereInput, orderBy: ConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConditionsConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1722,6 +2116,8 @@ type Subscription {
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
   creature(where: CreatureSubscriptionWhereInput): CreatureSubscriptionPayload
+  attributes(where: AttributesSubscriptionWhereInput): AttributesSubscriptionPayload
+  conditions(where: ConditionsSubscriptionWhereInput): ConditionsSubscriptionPayload
 }
 
 type User implements Node {

@@ -17,7 +17,8 @@ type Project {
   description: String
   events: [Event!]! @relation(name: "EventsByProject", onDelete: CASCADE)
   author: User! @relation(name: "ProjectsByUser", onDelete: SET_NULL)
-  creatures: [Creature!]! @relation(name: "CreaturesByProject", onDelete: CASCADE)
+  creatures: [Creature!]!
+    @relation(name: "CreaturesByProject", onDelete: CASCADE)
 }
 
 type Event {
@@ -38,12 +39,13 @@ type Creature {
   name: String
   race: String!
   shadow: String
-  toughness: Int!
-  painThreshold: Int!
-  corruption: Int!
-  corruptionThreshold: Int!
-  corruptionPermanent: Int!
-  defense: Int!
+  Conditions: Conditions! @relation(name: "ConditionsByCreature", onDelete: CASCADE)
+  attributes: Attributes! @relation(name: "AttributesByCreature", onDelete: CASCADE)
+}
+
+type Attributes {
+  id: ID! @unique
+  creature: Creature! @relation(name: "AttributesByCreature", onDelete: SET_NULL)
   accurate: Int!
   cunning: Int!
   discreet: Int!
@@ -52,11 +54,22 @@ type Creature {
   resolute: Int!
   strong: Int!
   vigilant: Int!
+  defense: Int!
+}
+
+type Conditions {
+  id: ID! @unique
+  creature: Creature! @relation(name: "ConditionsByCreature", onDelete: SET_NULL)
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
 }
 
 #----------ENUMS----------
 enum EventRole {
-  GENERIC,
-  QUEST,
+  GENERIC
+  QUEST
   COMBAT
 }
