@@ -12,6 +12,9 @@ import prisma from "./prisma"
 const server = new GraphQLServer({
     typeDefs: "./src/schema.graphql",
     resolvers,
+    resolverValidationOptions: {
+      requireResolversForResolveType: false
+    },
     context(request) {
       return {
         ...request,

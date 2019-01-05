@@ -5,6 +5,8 @@ type User {
   email: String! @unique
   password: String!
   projects: [Project!]! @relation(name: "ProjectsByUser", onDelete: CASCADE)
+  events: [Event!]! @relation(name: "EventsByUser", onDelete: CASCADE)
+  creatures: [Creature!]! @relation(name:"CreaturesByUser", onDelete: CASCADE)
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -19,6 +21,7 @@ type Project {
 
 type Event {
   id: ID! @unique
+  author: User! @relation(name: "EventsByUser", onDelete: SET_NULL)
   title: String!
   description: String
   eventRole: EventRole!
@@ -28,6 +31,7 @@ type Event {
 
 type Creature {
   id: ID! @unique
+  author: User! @relation(name:"CreaturesByUser", onDelete: SET_NULL)
   event: Event! @relation(name: "EventsByCreature", onDelete: SET_NULL)
   name: String
   race: String!

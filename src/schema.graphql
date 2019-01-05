@@ -1,4 +1,4 @@
-#import Event,Project,Creature,EventRole from "./generated/prisma.graphql"
+#import Event,Project,Creature,Attributes,Conditions,EventRole from "./generated/prisma.graphql"
 #----------TYPES----------
 type User {
   id: ID!
@@ -23,6 +23,9 @@ type Query {
 type Mutation {
   signup(data: SignupInput!): AuthPayload!
   login(data: LoginInput!): AuthPayload!
+  createProject(title: String!, description: String): Project!
+  createEvent(data: EventInput!): Event!
+  createCreature(data: CreatureInput!): Creature!
 }
 
 #----------INPUT----------
@@ -36,6 +39,42 @@ input SignupInput {
 input LoginInput {
   email: String!
   password: String!
+}
+
+input EventInput {
+  title: String!
+  description: String
+  eventRole: EventRole!
+  project: ID!
+}
+
+input CreatureInput {
+  event: ID!
+  name: String
+  race: String!
+  shadow: String
+  conditions: ConditionsInput
+  attributes: AttributesInput
+}
+
+input AttributesInput {
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  defense: Int!
+}
+
+input ConditionsInput {
+  toughness: Int!
+  painThreshold: Int!
+  corruption: Int!
+  corruptionThreshold: Int!
+  corruptionPermanent: Int!
 }
 
 #----------ENUMS----------           -> EventRole wird importiert, siehe Zeile 1

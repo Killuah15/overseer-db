@@ -1,5 +1,5 @@
 # source: https://overseer-db.herokuapp.com/overseer-db/dev
-# timestamp: Sat Jan 05 2019 16:48:16 GMT+0100 (GMT+01:00)
+# timestamp: Sat Jan 05 2019 18:35:00 GMT+0100 (GMT+01:00)
 
 type AggregateAttributes {
   count: Int!
@@ -780,6 +780,7 @@ input ConditionsWhereUniqueInput {
 
 type Creature implements Node {
   id: ID!
+  author(where: UserWhereInput): User!
   event(where: EventWhereInput): Event!
   name: String
   race: String!
@@ -802,9 +803,15 @@ input CreatureCreateInput {
   name: String
   race: String!
   shadow: String
+  author: UserCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
   Conditions: ConditionsCreateOneWithoutCreatureInput!
   attributes: AttributesCreateOneWithoutCreatureInput!
+}
+
+input CreatureCreateManyWithoutAuthorInput {
+  create: [CreatureCreateWithoutAuthorInput!]
+  connect: [CreatureWhereUniqueInput!]
 }
 
 input CreatureCreateManyWithoutEventInput {
@@ -826,14 +833,25 @@ input CreatureCreateWithoutAttributesInput {
   name: String
   race: String!
   shadow: String
+  author: UserCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
   Conditions: ConditionsCreateOneWithoutCreatureInput!
+}
+
+input CreatureCreateWithoutAuthorInput {
+  name: String
+  race: String!
+  shadow: String
+  event: EventCreateOneWithoutCreaturesInput!
+  Conditions: ConditionsCreateOneWithoutCreatureInput!
+  attributes: AttributesCreateOneWithoutCreatureInput!
 }
 
 input CreatureCreateWithoutConditionsInput {
   name: String
   race: String!
   shadow: String
+  author: UserCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
   attributes: AttributesCreateOneWithoutCreatureInput!
 }
@@ -842,6 +860,7 @@ input CreatureCreateWithoutEventInput {
   name: String
   race: String!
   shadow: String
+  author: UserCreateOneWithoutCreaturesInput!
   Conditions: ConditionsCreateOneWithoutCreatureInput!
   attributes: AttributesCreateOneWithoutCreatureInput!
 }
@@ -920,9 +939,19 @@ input CreatureUpdateInput {
   name: String
   race: String
   shadow: String
+  author: UserUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
   Conditions: ConditionsUpdateOneWithoutCreatureInput
   attributes: AttributesUpdateOneWithoutCreatureInput
+}
+
+input CreatureUpdateManyWithoutAuthorInput {
+  create: [CreatureCreateWithoutAuthorInput!]
+  connect: [CreatureWhereUniqueInput!]
+  disconnect: [CreatureWhereUniqueInput!]
+  delete: [CreatureWhereUniqueInput!]
+  update: [CreatureUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [CreatureUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
 input CreatureUpdateManyWithoutEventInput {
@@ -954,14 +983,25 @@ input CreatureUpdateWithoutAttributesDataInput {
   name: String
   race: String
   shadow: String
+  author: UserUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
   Conditions: ConditionsUpdateOneWithoutCreatureInput
+}
+
+input CreatureUpdateWithoutAuthorDataInput {
+  name: String
+  race: String
+  shadow: String
+  event: EventUpdateOneWithoutCreaturesInput
+  Conditions: ConditionsUpdateOneWithoutCreatureInput
+  attributes: AttributesUpdateOneWithoutCreatureInput
 }
 
 input CreatureUpdateWithoutConditionsDataInput {
   name: String
   race: String
   shadow: String
+  author: UserUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
   attributes: AttributesUpdateOneWithoutCreatureInput
 }
@@ -970,8 +1010,14 @@ input CreatureUpdateWithoutEventDataInput {
   name: String
   race: String
   shadow: String
+  author: UserUpdateOneWithoutCreaturesInput
   Conditions: ConditionsUpdateOneWithoutCreatureInput
   attributes: AttributesUpdateOneWithoutCreatureInput
+}
+
+input CreatureUpdateWithWhereUniqueWithoutAuthorInput {
+  where: CreatureWhereUniqueInput!
+  data: CreatureUpdateWithoutAuthorDataInput!
 }
 
 input CreatureUpdateWithWhereUniqueWithoutEventInput {
@@ -987,6 +1033,12 @@ input CreatureUpsertWithoutAttributesInput {
 input CreatureUpsertWithoutConditionsInput {
   update: CreatureUpdateWithoutConditionsDataInput!
   create: CreatureCreateWithoutConditionsInput!
+}
+
+input CreatureUpsertWithWhereUniqueWithoutAuthorInput {
+  where: CreatureWhereUniqueInput!
+  update: CreatureUpdateWithoutAuthorDataInput!
+  create: CreatureCreateWithoutAuthorInput!
 }
 
 input CreatureUpsertWithWhereUniqueWithoutEventInput {
@@ -1164,6 +1216,7 @@ input CreatureWhereInput {
 
   """All values not ending with the given string."""
   shadow_not_ends_with: String
+  author: UserWhereInput
   event: EventWhereInput
   Conditions: ConditionsWhereInput
   attributes: AttributesWhereInput
@@ -1177,6 +1230,7 @@ scalar DateTime
 
 type Event implements Node {
   id: ID!
+  author(where: UserWhereInput): User!
   title: String!
   description: String
   eventRole: EventRole!
@@ -1198,8 +1252,14 @@ input EventCreateInput {
   title: String!
   description: String
   eventRole: EventRole!
+  author: UserCreateOneWithoutEventsInput!
   project: ProjectCreateOneWithoutEventsInput!
   creatures: CreatureCreateManyWithoutEventInput
+}
+
+input EventCreateManyWithoutAuthorInput {
+  create: [EventCreateWithoutAuthorInput!]
+  connect: [EventWhereUniqueInput!]
 }
 
 input EventCreateManyWithoutProjectInput {
@@ -1212,10 +1272,19 @@ input EventCreateOneWithoutCreaturesInput {
   connect: EventWhereUniqueInput
 }
 
+input EventCreateWithoutAuthorInput {
+  title: String!
+  description: String
+  eventRole: EventRole!
+  project: ProjectCreateOneWithoutEventsInput!
+  creatures: CreatureCreateManyWithoutEventInput
+}
+
 input EventCreateWithoutCreaturesInput {
   title: String!
   description: String
   eventRole: EventRole!
+  author: UserCreateOneWithoutEventsInput!
   project: ProjectCreateOneWithoutEventsInput!
 }
 
@@ -1223,6 +1292,7 @@ input EventCreateWithoutProjectInput {
   title: String!
   description: String
   eventRole: EventRole!
+  author: UserCreateOneWithoutEventsInput!
   creatures: CreatureCreateManyWithoutEventInput
 }
 
@@ -1306,8 +1376,18 @@ input EventUpdateInput {
   title: String
   description: String
   eventRole: EventRole
+  author: UserUpdateOneWithoutEventsInput
   project: ProjectUpdateOneWithoutEventsInput
   creatures: CreatureUpdateManyWithoutEventInput
+}
+
+input EventUpdateManyWithoutAuthorInput {
+  create: [EventCreateWithoutAuthorInput!]
+  connect: [EventWhereUniqueInput!]
+  disconnect: [EventWhereUniqueInput!]
+  delete: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
 input EventUpdateManyWithoutProjectInput {
@@ -1327,10 +1407,19 @@ input EventUpdateOneWithoutCreaturesInput {
   upsert: EventUpsertWithoutCreaturesInput
 }
 
+input EventUpdateWithoutAuthorDataInput {
+  title: String
+  description: String
+  eventRole: EventRole
+  project: ProjectUpdateOneWithoutEventsInput
+  creatures: CreatureUpdateManyWithoutEventInput
+}
+
 input EventUpdateWithoutCreaturesDataInput {
   title: String
   description: String
   eventRole: EventRole
+  author: UserUpdateOneWithoutEventsInput
   project: ProjectUpdateOneWithoutEventsInput
 }
 
@@ -1338,7 +1427,13 @@ input EventUpdateWithoutProjectDataInput {
   title: String
   description: String
   eventRole: EventRole
+  author: UserUpdateOneWithoutEventsInput
   creatures: CreatureUpdateManyWithoutEventInput
+}
+
+input EventUpdateWithWhereUniqueWithoutAuthorInput {
+  where: EventWhereUniqueInput!
+  data: EventUpdateWithoutAuthorDataInput!
 }
 
 input EventUpdateWithWhereUniqueWithoutProjectInput {
@@ -1349,6 +1444,12 @@ input EventUpdateWithWhereUniqueWithoutProjectInput {
 input EventUpsertWithoutCreaturesInput {
   update: EventUpdateWithoutCreaturesDataInput!
   create: EventCreateWithoutCreaturesInput!
+}
+
+input EventUpsertWithWhereUniqueWithoutAuthorInput {
+  where: EventWhereUniqueInput!
+  update: EventUpdateWithoutAuthorDataInput!
+  create: EventCreateWithoutAuthorInput!
 }
 
 input EventUpsertWithWhereUniqueWithoutProjectInput {
@@ -1496,6 +1597,7 @@ input EventWhereInput {
 
   """All values that are not contained in given list."""
   eventRole_not_in: [EventRole!]
+  author: UserWhereInput
   project: ProjectWhereInput
   creatures_every: CreatureWhereInput
   creatures_some: CreatureWhereInput
@@ -1925,6 +2027,8 @@ type User implements Node {
   email: String!
   password: String!
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
+  creatures(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creature!]
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -1944,6 +2048,18 @@ input UserCreateInput {
   email: String!
   password: String!
   projects: ProjectCreateManyWithoutAuthorInput
+  events: EventCreateManyWithoutAuthorInput
+  creatures: CreatureCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneWithoutCreaturesInput {
+  create: UserCreateWithoutCreaturesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutProjectsInput {
@@ -1951,10 +2067,28 @@ input UserCreateOneWithoutProjectsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutCreaturesInput {
+  username: String!
+  email: String!
+  password: String!
+  projects: ProjectCreateManyWithoutAuthorInput
+  events: EventCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutEventsInput {
+  username: String!
+  email: String!
+  password: String!
+  projects: ProjectCreateManyWithoutAuthorInput
+  creatures: CreatureCreateManyWithoutAuthorInput
+}
+
 input UserCreateWithoutProjectsInput {
   username: String!
   email: String!
   password: String!
+  events: EventCreateManyWithoutAuthorInput
+  creatures: CreatureCreateManyWithoutAuthorInput
 }
 
 """An edge in a connection."""
@@ -2034,6 +2168,24 @@ input UserUpdateInput {
   email: String
   password: String
   projects: ProjectUpdateManyWithoutAuthorInput
+  events: EventUpdateManyWithoutAuthorInput
+  creatures: CreatureUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateOneWithoutCreaturesInput {
+  create: UserCreateWithoutCreaturesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutCreaturesDataInput
+  upsert: UserUpsertWithoutCreaturesInput
+}
+
+input UserUpdateOneWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutEventsDataInput
+  upsert: UserUpsertWithoutEventsInput
 }
 
 input UserUpdateOneWithoutProjectsInput {
@@ -2044,10 +2196,38 @@ input UserUpdateOneWithoutProjectsInput {
   upsert: UserUpsertWithoutProjectsInput
 }
 
+input UserUpdateWithoutCreaturesDataInput {
+  username: String
+  email: String
+  password: String
+  projects: ProjectUpdateManyWithoutAuthorInput
+  events: EventUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutEventsDataInput {
+  username: String
+  email: String
+  password: String
+  projects: ProjectUpdateManyWithoutAuthorInput
+  creatures: CreatureUpdateManyWithoutAuthorInput
+}
+
 input UserUpdateWithoutProjectsDataInput {
   username: String
   email: String
   password: String
+  events: EventUpdateManyWithoutAuthorInput
+  creatures: CreatureUpdateManyWithoutAuthorInput
+}
+
+input UserUpsertWithoutCreaturesInput {
+  update: UserUpdateWithoutCreaturesDataInput!
+  create: UserCreateWithoutCreaturesInput!
+}
+
+input UserUpsertWithoutEventsInput {
+  update: UserUpdateWithoutEventsDataInput!
+  create: UserCreateWithoutEventsInput!
 }
 
 input UserUpsertWithoutProjectsInput {
@@ -2271,6 +2451,12 @@ input UserWhereInput {
   projects_every: ProjectWhereInput
   projects_some: ProjectWhereInput
   projects_none: ProjectWhereInput
+  events_every: EventWhereInput
+  events_some: EventWhereInput
+  events_none: EventWhereInput
+  creatures_every: CreatureWhereInput
+  creatures_some: CreatureWhereInput
+  creatures_none: CreatureWhereInput
 }
 
 input UserWhereUniqueInput {
