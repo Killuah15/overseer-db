@@ -4,4 +4,6 @@ const isValidPassword = password => password.length >= 8 && password.length <= 1
 //See if Email has the @ Symbol inside
 const isValidEmail = email => email.includes('@')
 
-export { isValidPassword, isValidEmail }
+const validateArg = arg => arg ? arg : null 
+
+export { isValidPassword, isValidEmail, validateArg }

@@ -18,6 +18,13 @@ type AuthPayload {
 #----------OPERATIONS----------
 type Query {
     users: [User!]!
+    projects: [Project!]!
+    events(projectID: ID, projectTitle: String): [Event!]!
+    creatures(projectID: ID, projectTitle: String, eventID: ID, eventTitle: String): [Creature!]!
+    currentUser: User!
+    project(id: ID!): Project!
+    event(id: ID!): Event!
+    creature(id: ID!): Creature!
 }
 
 type Mutation {
@@ -26,6 +33,10 @@ type Mutation {
   createProject(title: String!, description: String): Project!
   createEvent(data: EventInput!): Event!
   createCreature(data: CreatureInput!): Creature!
+  deleteCurrentUser: User!
+  deleteProject(id: ID!): Project!
+  deleteEvent(id: ID!): Event!
+  deleteCreature(id: ID!): Creature!
 }
 
 #----------INPUT----------
