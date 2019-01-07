@@ -9,6 +9,7 @@ const createProject = async (
   info
 ) => {
   //get UserID stored in sessionStorage (through jwt)
+  console.log(`cP: ${request.signedCookies.otid}`);
   const uid = await getUserID(request)
 
   //create Project on the database - map inputs to DB graphql Mutation
