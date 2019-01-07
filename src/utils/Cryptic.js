@@ -9,8 +9,6 @@ const generateToken = id =>
 const getUserID = (request, requireAuth = true) => {
   const tokenCookie = request.signedCookies.otid
 
-  console.log(`tokenHeader: ${tokenCookie} ; otid: ${request.signedCookies.otid}`);
-
   if (tokenCookie) {
     //const token = tokenHeader.replace('Bearer ', '')
     const decoded = jwt.verify(tokenCookie, process.env.JWT_SECRET)
