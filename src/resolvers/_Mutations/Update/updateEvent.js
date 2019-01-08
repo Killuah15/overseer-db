@@ -11,9 +11,7 @@ const updateEvent = async (parent, { id, data }, { prisma, request }, info) => {
         throw new Error('Unable to find Event')
 
     const updatedEvent = await prisma.mutation.updateEvent({
-        data: {
-            ...data
-        },
+        data,
         where: {
             id
         }
