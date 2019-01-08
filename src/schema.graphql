@@ -40,6 +40,7 @@ type Mutation {
   updateProject(id: ID!, data: uProjectInput): Project!
   updateEvent(id: ID!, data: uEventInput): Event!
   updateCreature(id: ID!, data: uCreatureInput): Creature!
+  updateCurrentUser(password: String!, data: uUserInput): User!
 }
 
 #----------INPUT----------
@@ -128,6 +129,11 @@ input uConditionsInput {
   corruption: Int
   corruptionThreshold: Int
   corruptionPermanent: Int
+}
+
+input uUserInput {
+  username: String
+  password: String
 }
 
 #----------ENUMS----------           -> EventRole wird importiert, siehe Zeile 1

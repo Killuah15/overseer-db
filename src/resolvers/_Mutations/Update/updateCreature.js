@@ -1,12 +1,14 @@
+import { getUserID } from '../../../utils/Cryptic';
+
 const updateCreature = async (parent, { id, data }, { prisma, request }, info) => {
     const creatureExists = prisma.exists.Creature({
         id
     })
 
+    await getUserID(request)    //will throw an error if user is not authenticated
+
     if(!creatureExists)
         throw new Error('Unable to find Creature')
-
-    console.log(data);
 
     const updatedCreature = await prisma.mutation.updateCreature({
         data: {
@@ -25,11 +27,7 @@ const updateCreature = async (parent, { id, data }, { prisma, request }, info) =
         where: {
             id
         }
-    })
-
-    //TODO: returns no attributes and conditions, however they get updated in the database
-
-    console.log(updatedCreature);
+    }, info)
 
     return updatedCreature
 }
