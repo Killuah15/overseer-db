@@ -7,10 +7,9 @@ const generateToken = id =>
   jwt.sign({ userId: id }, process.env.JWT_SECRET, { expiresIn: '2 days' })
 
 const getUserID = (request, requireAuth = true) => {
-  const tokenHeader = request.headers.authorization
+  const token = request.signedCookies.otid
 
-  if (tokenHeader) {
-    const token = tokenHeader.replace('Bearer ', '')
+  if (token) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
     return decoded.userId
   }
