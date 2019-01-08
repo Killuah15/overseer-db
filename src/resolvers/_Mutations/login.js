@@ -18,6 +18,13 @@ const login = async (parent, { data }, { prisma, request }, info) => {
 
     if (!isMatch) throw new Error('Unable to login')
 
+    const token = generateToken(user.id)
+    response.cookie('otid', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 2,  //2 days
+      signed: true
+    })
+
     //return AuthPayload
     return {
       user,
