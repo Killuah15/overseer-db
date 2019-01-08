@@ -15,6 +15,3 @@ SERVER-DEV: http://localhost:4000 (NACH: npm run dev)
 DB-PROD: https://overseer-db.herokuapp.com/overseer-db-prod/prod
 SERVER-PROD: https://still-fortress-67589.herokuapp.com
 
-TODO:
-    -add a deleteUser Mutation
-
