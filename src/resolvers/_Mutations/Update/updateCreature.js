@@ -29,7 +29,7 @@ const updateCreature = async (
               update: {
                 fitness: {
                   update: {
-                    ...data.Conditions.fitness
+                    ...data.Conditions.physical.fitness
                   }
                 }
               }
@@ -38,7 +38,7 @@ const updateCreature = async (
               update: {
                 corruption: {
                   update: {
-                    ...data.Conditions.corruption
+                    ...data.Conditions.spiritual.corruption
                   }
                 }
               }

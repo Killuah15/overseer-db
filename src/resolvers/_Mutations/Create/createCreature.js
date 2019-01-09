@@ -5,9 +5,9 @@ const createCreature = async (parent, { data }, { prisma, request }, info) => {
   const uid = await getUserID(request)
 
   //destructure conditions input
-  const { toughness, painThreshold } = data.Conditions.fitness
+  const { toughness, painThreshold } = data.Conditions.physical.fitness
 
-  const { current, threshold, permanent } = data.Conditions.corruption
+  const { current, threshold, permanent } = data.Conditions.spiritual.corruption
 
   //destructure attributes input
   const {
@@ -39,9 +39,9 @@ const createCreature = async (parent, { data }, { prisma, request }, info) => {
         },
         Conditions: {
           create: {
-            physicalConditions: {
+            physical: {
               create: {
-                fitnessCondition: {
+                fitness: {
                   create: {
                     toughness,
                     painThreshold
@@ -49,9 +49,9 @@ const createCreature = async (parent, { data }, { prisma, request }, info) => {
                 }
               }
             },
-            spiritualConditions: {
+            spiritual: {
               create: {
-                corruptionCondition: {
+                corruption: {
                   create: {
                     current,
                     threshold,

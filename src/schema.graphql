@@ -85,8 +85,16 @@ input AttributesInput {
 }
 
 input ConditionsInput {
-  corruption: CorruptionInput!
+  physical: PhysicalConditions!
+  spiritual: SpiritualConditions!  
+}
+
+input PhysicalConditions {
   fitness: FitnessInput!
+}
+
+input SpiritualConditions {
+  corruption: CorruptionInput!
 }
 
 input CorruptionInput {
