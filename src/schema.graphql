@@ -17,14 +17,14 @@ type AuthPayload {
 
 #----------OPERATIONS----------
 type Query {
-    users: [User!]!
-    projects: [Project!]!
-    events(projectID: ID, projectTitle: String): [Event!]!
-    creatures(projectID: ID, projectTitle: String, eventID: ID, eventTitle: String): [Creature!]!
-    currentUser: User!
-    project(id: ID!): Project!
-    event(id: ID!): Event!
-    creature(id: ID!): Creature!
+  users: [User!]!
+  projects: [Project!]!
+  events(projectID: ID, projectTitle: String): [Event!]!
+  creatures(projectID: ID, projectTitle: String, eventID: ID, eventTitle: String): [Creature!]!
+  currentUser: User!
+  project(id: ID!): Project!
+  event(id: ID!): Event!
+  creature(id: ID!): Creature!
 }
 
 type Mutation {
@@ -107,6 +107,8 @@ input FitnessInput {
   toughness: Int!
   painThreshold: Int!
 }
+
+#----------UPDATE INPUTS----------
 
 input uProjectInput {
   title: String
