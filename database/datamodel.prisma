@@ -6,7 +6,7 @@ type User {
   password: String!
   projects: [Project!]! @relation(name: "ProjectsByUser", onDelete: CASCADE)
   events: [Event!]! @relation(name: "EventsByUser", onDelete: CASCADE)
-  creatures: [Creature!]! @relation(name:"CreaturesByUser", onDelete: CASCADE)
+  creatures: [Creature!]! @relation(name: "CreaturesByUser", onDelete: CASCADE)
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -31,7 +31,7 @@ type Event {
 
 type Creature {
   id: ID! @unique
-  author: User! @relation(name:"CreaturesByUser", onDelete: SET_NULL)
+  author: User! @relation(name: "CreaturesByUser", onDelete: SET_NULL)
   event: Event! @relation(name: "EventsByCreature", onDelete: SET_NULL)
   name: String
   race: String!
@@ -57,11 +57,35 @@ type Attributes {
 type Conditions {
   id: ID! @unique
   creature: Creature! @relation(name: "ConditionsByCreature", onDelete: SET_NULL)
+  physical: PhysicalConditions! @relation(name: "ConditionsByPhysicalCondition", onDelete: CASCADE)
+  spiritual: SpiritualConditions! @relation(name: "ConditionsBySpiritualCondition", onDelete: CASCADE)
+}
+
+type PhysicalConditions {
+  id: ID! @unique
+  conditions: Conditions! @relation(name: "ConditionsByPhysicalCondition", onDelete: SET_NULL)
+  fitness: FitnessCondition! @relation(name: "PhysicalConditionsByFitnessConditions", onDelete: CASCADE)
+}
+
+type SpiritualConditions {
+  id: ID! @unique
+  conditions: Conditions! @relation(name: "ConditionsBySpiritualCondition", onDelete: SET_NULL)
+  corruption: CorruptionCondition! @relation(name: "CorruptionConditionsBySpiritualConditions", onDelete: CASCADE)
+}
+
+type FitnessCondition {
+  id: ID! @unique
+  physicalConditions: PhysicalConditions! @relation(name: "PhysicalConditionsByFitnessConditions", onDelete: SET_NULL)
   toughness: Int!
   painThreshold: Int!
-  corruption: Int!
-  corruptionThreshold: Int!
-  corruptionPermanent: Int!
+}
+
+type CorruptionCondition {
+  id: ID! @unique
+  spiritualConditions: SpiritualConditions! @relation(name: "CorruptionConditionsBySpiritualConditions", onDelete: SET_NULL)
+  current: Int!
+  threshold: Int!
+  permanent: Int!
 }
 
 #----------ENUMS----------
