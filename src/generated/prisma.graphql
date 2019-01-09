@@ -1,5 +1,5 @@
 # source: https://overseer-db.herokuapp.com/overseer-db/dev
-# timestamp: Wed Jan 09 2019 17:04:04 GMT+0100 (GMT+01:00)
+# timestamp: Wed Jan 09 2019 18:37:00 GMT+0100 (GMT+01:00)
 
 type AggregateAttributes {
   count: Int!
@@ -9,7 +9,7 @@ type AggregateConditions {
   count: Int!
 }
 
-type AggregateCorruptionCondition {
+type AggregateCorruption {
   count: Int!
 }
 
@@ -21,7 +21,7 @@ type AggregateEvent {
   count: Int!
 }
 
-type AggregateFitnessCondition {
+type AggregateFitness {
   count: Int!
 }
 
@@ -712,7 +712,7 @@ input ConditionsWhereUniqueInput {
   id: ID
 }
 
-type CorruptionCondition implements Node {
+type Corruption implements Node {
   id: ID!
   spiritualConditions(where: SpiritualConditionsWhereInput): SpiritualConditions!
   current: Int!
@@ -721,43 +721,43 @@ type CorruptionCondition implements Node {
 }
 
 """A connection to a list of items."""
-type CorruptionConditionConnection {
+type CorruptionConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [CorruptionConditionEdge]!
-  aggregate: AggregateCorruptionCondition!
+  edges: [CorruptionEdge]!
+  aggregate: AggregateCorruption!
 }
 
-input CorruptionConditionCreateInput {
+input CorruptionCreateInput {
   current: Int!
   threshold: Int!
   permanent: Int!
   spiritualConditions: SpiritualConditionsCreateOneWithoutCorruptionInput!
 }
 
-input CorruptionConditionCreateOneWithoutSpiritualConditionsInput {
-  create: CorruptionConditionCreateWithoutSpiritualConditionsInput
-  connect: CorruptionConditionWhereUniqueInput
+input CorruptionCreateOneWithoutSpiritualConditionsInput {
+  create: CorruptionCreateWithoutSpiritualConditionsInput
+  connect: CorruptionWhereUniqueInput
 }
 
-input CorruptionConditionCreateWithoutSpiritualConditionsInput {
+input CorruptionCreateWithoutSpiritualConditionsInput {
   current: Int!
   threshold: Int!
   permanent: Int!
 }
 
 """An edge in a connection."""
-type CorruptionConditionEdge {
+type CorruptionEdge {
   """The item at the end of the edge."""
-  node: CorruptionCondition!
+  node: Corruption!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum CorruptionConditionOrderByInput {
+enum CorruptionOrderByInput {
   id_ASC
   id_DESC
   current_ASC
@@ -772,29 +772,29 @@ enum CorruptionConditionOrderByInput {
   createdAt_DESC
 }
 
-type CorruptionConditionPreviousValues {
+type CorruptionPreviousValues {
   id: ID!
   current: Int!
   threshold: Int!
   permanent: Int!
 }
 
-type CorruptionConditionSubscriptionPayload {
+type CorruptionSubscriptionPayload {
   mutation: MutationType!
-  node: CorruptionCondition
+  node: Corruption
   updatedFields: [String!]
-  previousValues: CorruptionConditionPreviousValues
+  previousValues: CorruptionPreviousValues
 }
 
-input CorruptionConditionSubscriptionWhereInput {
+input CorruptionSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [CorruptionConditionSubscriptionWhereInput!]
+  AND: [CorruptionSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [CorruptionConditionSubscriptionWhereInput!]
+  OR: [CorruptionSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [CorruptionConditionSubscriptionWhereInput!]
+  NOT: [CorruptionSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -815,44 +815,44 @@ input CorruptionConditionSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: CorruptionConditionWhereInput
+  node: CorruptionWhereInput
 }
 
-input CorruptionConditionUpdateInput {
+input CorruptionUpdateInput {
   current: Int
   threshold: Int
   permanent: Int
   spiritualConditions: SpiritualConditionsUpdateOneWithoutCorruptionInput
 }
 
-input CorruptionConditionUpdateOneWithoutSpiritualConditionsInput {
-  create: CorruptionConditionCreateWithoutSpiritualConditionsInput
-  connect: CorruptionConditionWhereUniqueInput
+input CorruptionUpdateOneWithoutSpiritualConditionsInput {
+  create: CorruptionCreateWithoutSpiritualConditionsInput
+  connect: CorruptionWhereUniqueInput
   delete: Boolean
-  update: CorruptionConditionUpdateWithoutSpiritualConditionsDataInput
-  upsert: CorruptionConditionUpsertWithoutSpiritualConditionsInput
+  update: CorruptionUpdateWithoutSpiritualConditionsDataInput
+  upsert: CorruptionUpsertWithoutSpiritualConditionsInput
 }
 
-input CorruptionConditionUpdateWithoutSpiritualConditionsDataInput {
+input CorruptionUpdateWithoutSpiritualConditionsDataInput {
   current: Int
   threshold: Int
   permanent: Int
 }
 
-input CorruptionConditionUpsertWithoutSpiritualConditionsInput {
-  update: CorruptionConditionUpdateWithoutSpiritualConditionsDataInput!
-  create: CorruptionConditionCreateWithoutSpiritualConditionsInput!
+input CorruptionUpsertWithoutSpiritualConditionsInput {
+  update: CorruptionUpdateWithoutSpiritualConditionsDataInput!
+  create: CorruptionCreateWithoutSpiritualConditionsInput!
 }
 
-input CorruptionConditionWhereInput {
+input CorruptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [CorruptionConditionWhereInput!]
+  AND: [CorruptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [CorruptionConditionWhereInput!]
+  OR: [CorruptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [CorruptionConditionWhereInput!]
+  NOT: [CorruptionWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -962,7 +962,7 @@ input CorruptionConditionWhereInput {
   spiritualConditions: SpiritualConditionsWhereInput
 }
 
-input CorruptionConditionWhereUniqueInput {
+input CorruptionWhereUniqueInput {
   id: ID
 }
 
@@ -1796,7 +1796,7 @@ input EventWhereUniqueInput {
   id: ID
 }
 
-type FitnessCondition implements Node {
+type Fitness implements Node {
   id: ID!
   physicalConditions(where: PhysicalConditionsWhereInput): PhysicalConditions!
   toughness: Int!
@@ -1804,41 +1804,41 @@ type FitnessCondition implements Node {
 }
 
 """A connection to a list of items."""
-type FitnessConditionConnection {
+type FitnessConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [FitnessConditionEdge]!
-  aggregate: AggregateFitnessCondition!
+  edges: [FitnessEdge]!
+  aggregate: AggregateFitness!
 }
 
-input FitnessConditionCreateInput {
+input FitnessCreateInput {
   toughness: Int!
   painThreshold: Int!
   physicalConditions: PhysicalConditionsCreateOneWithoutFitnessInput!
 }
 
-input FitnessConditionCreateOneWithoutPhysicalConditionsInput {
-  create: FitnessConditionCreateWithoutPhysicalConditionsInput
-  connect: FitnessConditionWhereUniqueInput
+input FitnessCreateOneWithoutPhysicalConditionsInput {
+  create: FitnessCreateWithoutPhysicalConditionsInput
+  connect: FitnessWhereUniqueInput
 }
 
-input FitnessConditionCreateWithoutPhysicalConditionsInput {
+input FitnessCreateWithoutPhysicalConditionsInput {
   toughness: Int!
   painThreshold: Int!
 }
 
 """An edge in a connection."""
-type FitnessConditionEdge {
+type FitnessEdge {
   """The item at the end of the edge."""
-  node: FitnessCondition!
+  node: Fitness!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum FitnessConditionOrderByInput {
+enum FitnessOrderByInput {
   id_ASC
   id_DESC
   toughness_ASC
@@ -1851,28 +1851,28 @@ enum FitnessConditionOrderByInput {
   createdAt_DESC
 }
 
-type FitnessConditionPreviousValues {
+type FitnessPreviousValues {
   id: ID!
   toughness: Int!
   painThreshold: Int!
 }
 
-type FitnessConditionSubscriptionPayload {
+type FitnessSubscriptionPayload {
   mutation: MutationType!
-  node: FitnessCondition
+  node: Fitness
   updatedFields: [String!]
-  previousValues: FitnessConditionPreviousValues
+  previousValues: FitnessPreviousValues
 }
 
-input FitnessConditionSubscriptionWhereInput {
+input FitnessSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [FitnessConditionSubscriptionWhereInput!]
+  AND: [FitnessSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [FitnessConditionSubscriptionWhereInput!]
+  OR: [FitnessSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [FitnessConditionSubscriptionWhereInput!]
+  NOT: [FitnessSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -1893,42 +1893,42 @@ input FitnessConditionSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: FitnessConditionWhereInput
+  node: FitnessWhereInput
 }
 
-input FitnessConditionUpdateInput {
+input FitnessUpdateInput {
   toughness: Int
   painThreshold: Int
   physicalConditions: PhysicalConditionsUpdateOneWithoutFitnessInput
 }
 
-input FitnessConditionUpdateOneWithoutPhysicalConditionsInput {
-  create: FitnessConditionCreateWithoutPhysicalConditionsInput
-  connect: FitnessConditionWhereUniqueInput
+input FitnessUpdateOneWithoutPhysicalConditionsInput {
+  create: FitnessCreateWithoutPhysicalConditionsInput
+  connect: FitnessWhereUniqueInput
   delete: Boolean
-  update: FitnessConditionUpdateWithoutPhysicalConditionsDataInput
-  upsert: FitnessConditionUpsertWithoutPhysicalConditionsInput
+  update: FitnessUpdateWithoutPhysicalConditionsDataInput
+  upsert: FitnessUpsertWithoutPhysicalConditionsInput
 }
 
-input FitnessConditionUpdateWithoutPhysicalConditionsDataInput {
+input FitnessUpdateWithoutPhysicalConditionsDataInput {
   toughness: Int
   painThreshold: Int
 }
 
-input FitnessConditionUpsertWithoutPhysicalConditionsInput {
-  update: FitnessConditionUpdateWithoutPhysicalConditionsDataInput!
-  create: FitnessConditionCreateWithoutPhysicalConditionsInput!
+input FitnessUpsertWithoutPhysicalConditionsInput {
+  update: FitnessUpdateWithoutPhysicalConditionsDataInput!
+  create: FitnessCreateWithoutPhysicalConditionsInput!
 }
 
-input FitnessConditionWhereInput {
+input FitnessWhereInput {
   """Logical AND on all given filters."""
-  AND: [FitnessConditionWhereInput!]
+  AND: [FitnessWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [FitnessConditionWhereInput!]
+  OR: [FitnessWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [FitnessConditionWhereInput!]
+  NOT: [FitnessWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -2016,7 +2016,7 @@ input FitnessConditionWhereInput {
   physicalConditions: PhysicalConditionsWhereInput
 }
 
-input FitnessConditionWhereUniqueInput {
+input FitnessWhereUniqueInput {
   id: ID
 }
 
@@ -2035,8 +2035,8 @@ type Mutation {
   createConditions(data: ConditionsCreateInput!): Conditions!
   createPhysicalConditions(data: PhysicalConditionsCreateInput!): PhysicalConditions!
   createSpiritualConditions(data: SpiritualConditionsCreateInput!): SpiritualConditions!
-  createFitnessCondition(data: FitnessConditionCreateInput!): FitnessCondition!
-  createCorruptionCondition(data: CorruptionConditionCreateInput!): CorruptionCondition!
+  createFitness(data: FitnessCreateInput!): Fitness!
+  createCorruption(data: CorruptionCreateInput!): Corruption!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
@@ -2045,8 +2045,8 @@ type Mutation {
   updateConditions(data: ConditionsUpdateInput!, where: ConditionsWhereUniqueInput!): Conditions
   updatePhysicalConditions(data: PhysicalConditionsUpdateInput!, where: PhysicalConditionsWhereUniqueInput!): PhysicalConditions
   updateSpiritualConditions(data: SpiritualConditionsUpdateInput!, where: SpiritualConditionsWhereUniqueInput!): SpiritualConditions
-  updateFitnessCondition(data: FitnessConditionUpdateInput!, where: FitnessConditionWhereUniqueInput!): FitnessCondition
-  updateCorruptionCondition(data: CorruptionConditionUpdateInput!, where: CorruptionConditionWhereUniqueInput!): CorruptionCondition
+  updateFitness(data: FitnessUpdateInput!, where: FitnessWhereUniqueInput!): Fitness
+  updateCorruption(data: CorruptionUpdateInput!, where: CorruptionWhereUniqueInput!): Corruption
   deleteUser(where: UserWhereUniqueInput!): User
   deleteProject(where: ProjectWhereUniqueInput!): Project
   deleteEvent(where: EventWhereUniqueInput!): Event
@@ -2055,8 +2055,8 @@ type Mutation {
   deleteConditions(where: ConditionsWhereUniqueInput!): Conditions
   deletePhysicalConditions(where: PhysicalConditionsWhereUniqueInput!): PhysicalConditions
   deleteSpiritualConditions(where: SpiritualConditionsWhereUniqueInput!): SpiritualConditions
-  deleteFitnessCondition(where: FitnessConditionWhereUniqueInput!): FitnessCondition
-  deleteCorruptionCondition(where: CorruptionConditionWhereUniqueInput!): CorruptionCondition
+  deleteFitness(where: FitnessWhereUniqueInput!): Fitness
+  deleteCorruption(where: CorruptionWhereUniqueInput!): Corruption
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
@@ -2065,8 +2065,8 @@ type Mutation {
   upsertConditions(where: ConditionsWhereUniqueInput!, create: ConditionsCreateInput!, update: ConditionsUpdateInput!): Conditions!
   upsertPhysicalConditions(where: PhysicalConditionsWhereUniqueInput!, create: PhysicalConditionsCreateInput!, update: PhysicalConditionsUpdateInput!): PhysicalConditions!
   upsertSpiritualConditions(where: SpiritualConditionsWhereUniqueInput!, create: SpiritualConditionsCreateInput!, update: SpiritualConditionsUpdateInput!): SpiritualConditions!
-  upsertFitnessCondition(where: FitnessConditionWhereUniqueInput!, create: FitnessConditionCreateInput!, update: FitnessConditionUpdateInput!): FitnessCondition!
-  upsertCorruptionCondition(where: CorruptionConditionWhereUniqueInput!, create: CorruptionConditionCreateInput!, update: CorruptionConditionUpdateInput!): CorruptionCondition!
+  upsertFitness(where: FitnessWhereUniqueInput!, create: FitnessCreateInput!, update: FitnessUpdateInput!): Fitness!
+  upsertCorruption(where: CorruptionWhereUniqueInput!, create: CorruptionCreateInput!, update: CorruptionUpdateInput!): Corruption!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
@@ -2075,8 +2075,8 @@ type Mutation {
   updateManyConditionses(data: ConditionsUpdateInput!, where: ConditionsWhereInput): BatchPayload!
   updateManyPhysicalConditionses(data: PhysicalConditionsUpdateInput!, where: PhysicalConditionsWhereInput): BatchPayload!
   updateManySpiritualConditionses(data: SpiritualConditionsUpdateInput!, where: SpiritualConditionsWhereInput): BatchPayload!
-  updateManyFitnessConditions(data: FitnessConditionUpdateInput!, where: FitnessConditionWhereInput): BatchPayload!
-  updateManyCorruptionConditions(data: CorruptionConditionUpdateInput!, where: CorruptionConditionWhereInput): BatchPayload!
+  updateManyFitnesses(data: FitnessUpdateInput!, where: FitnessWhereInput): BatchPayload!
+  updateManyCorruptions(data: CorruptionUpdateInput!, where: CorruptionWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyProjects(where: ProjectWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
@@ -2085,8 +2085,8 @@ type Mutation {
   deleteManyConditionses(where: ConditionsWhereInput): BatchPayload!
   deleteManyPhysicalConditionses(where: PhysicalConditionsWhereInput): BatchPayload!
   deleteManySpiritualConditionses(where: SpiritualConditionsWhereInput): BatchPayload!
-  deleteManyFitnessConditions(where: FitnessConditionWhereInput): BatchPayload!
-  deleteManyCorruptionConditions(where: CorruptionConditionWhereInput): BatchPayload!
+  deleteManyFitnesses(where: FitnessWhereInput): BatchPayload!
+  deleteManyCorruptions(where: CorruptionWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -2119,7 +2119,7 @@ type PageInfo {
 type PhysicalConditions implements Node {
   id: ID!
   conditions(where: ConditionsWhereInput): Conditions!
-  fitness(where: FitnessConditionWhereInput): FitnessCondition!
+  fitness(where: FitnessWhereInput): Fitness!
 }
 
 """A connection to a list of items."""
@@ -2134,7 +2134,7 @@ type PhysicalConditionsConnection {
 
 input PhysicalConditionsCreateInput {
   conditions: ConditionsCreateOneWithoutPhysicalInput!
-  fitness: FitnessConditionCreateOneWithoutPhysicalConditionsInput!
+  fitness: FitnessCreateOneWithoutPhysicalConditionsInput!
 }
 
 input PhysicalConditionsCreateOneWithoutConditionsInput {
@@ -2148,7 +2148,7 @@ input PhysicalConditionsCreateOneWithoutFitnessInput {
 }
 
 input PhysicalConditionsCreateWithoutConditionsInput {
-  fitness: FitnessConditionCreateOneWithoutPhysicalConditionsInput!
+  fitness: FitnessCreateOneWithoutPhysicalConditionsInput!
 }
 
 input PhysicalConditionsCreateWithoutFitnessInput {
@@ -2218,7 +2218,7 @@ input PhysicalConditionsSubscriptionWhereInput {
 
 input PhysicalConditionsUpdateInput {
   conditions: ConditionsUpdateOneWithoutPhysicalInput
-  fitness: FitnessConditionUpdateOneWithoutPhysicalConditionsInput
+  fitness: FitnessUpdateOneWithoutPhysicalConditionsInput
 }
 
 input PhysicalConditionsUpdateOneWithoutConditionsInput {
@@ -2238,7 +2238,7 @@ input PhysicalConditionsUpdateOneWithoutFitnessInput {
 }
 
 input PhysicalConditionsUpdateWithoutConditionsDataInput {
-  fitness: FitnessConditionUpdateOneWithoutPhysicalConditionsInput
+  fitness: FitnessUpdateOneWithoutPhysicalConditionsInput
 }
 
 input PhysicalConditionsUpdateWithoutFitnessDataInput {
@@ -2305,7 +2305,7 @@ input PhysicalConditionsWhereInput {
   """All values not ending with the given string."""
   id_not_ends_with: ID
   conditions: ConditionsWhereInput
-  fitness: FitnessConditionWhereInput
+  fitness: FitnessWhereInput
 }
 
 input PhysicalConditionsWhereUniqueInput {
@@ -2626,8 +2626,8 @@ type Query {
   conditionses(where: ConditionsWhereInput, orderBy: ConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Conditions]!
   physicalConditionses(where: PhysicalConditionsWhereInput, orderBy: PhysicalConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PhysicalConditions]!
   spiritualConditionses(where: SpiritualConditionsWhereInput, orderBy: SpiritualConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SpiritualConditions]!
-  fitnessConditions(where: FitnessConditionWhereInput, orderBy: FitnessConditionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FitnessCondition]!
-  corruptionConditions(where: CorruptionConditionWhereInput, orderBy: CorruptionConditionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CorruptionCondition]!
+  fitnesses(where: FitnessWhereInput, orderBy: FitnessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fitness]!
+  corruptions(where: CorruptionWhereInput, orderBy: CorruptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Corruption]!
   user(where: UserWhereUniqueInput!): User
   project(where: ProjectWhereUniqueInput!): Project
   event(where: EventWhereUniqueInput!): Event
@@ -2636,8 +2636,8 @@ type Query {
   conditions(where: ConditionsWhereUniqueInput!): Conditions
   physicalConditions(where: PhysicalConditionsWhereUniqueInput!): PhysicalConditions
   spiritualConditions(where: SpiritualConditionsWhereUniqueInput!): SpiritualConditions
-  fitnessCondition(where: FitnessConditionWhereUniqueInput!): FitnessCondition
-  corruptionCondition(where: CorruptionConditionWhereUniqueInput!): CorruptionCondition
+  fitness(where: FitnessWhereUniqueInput!): Fitness
+  corruption(where: CorruptionWhereUniqueInput!): Corruption
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
@@ -2646,8 +2646,8 @@ type Query {
   conditionsesConnection(where: ConditionsWhereInput, orderBy: ConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConditionsConnection!
   physicalConditionsesConnection(where: PhysicalConditionsWhereInput, orderBy: PhysicalConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PhysicalConditionsConnection!
   spiritualConditionsesConnection(where: SpiritualConditionsWhereInput, orderBy: SpiritualConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpiritualConditionsConnection!
-  fitnessConditionsConnection(where: FitnessConditionWhereInput, orderBy: FitnessConditionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FitnessConditionConnection!
-  corruptionConditionsConnection(where: CorruptionConditionWhereInput, orderBy: CorruptionConditionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CorruptionConditionConnection!
+  fitnessesConnection(where: FitnessWhereInput, orderBy: FitnessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FitnessConnection!
+  corruptionsConnection(where: CorruptionWhereInput, orderBy: CorruptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CorruptionConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -2659,7 +2659,7 @@ type Query {
 type SpiritualConditions implements Node {
   id: ID!
   conditions(where: ConditionsWhereInput): Conditions!
-  corruption(where: CorruptionConditionWhereInput): CorruptionCondition!
+  corruption(where: CorruptionWhereInput): Corruption!
 }
 
 """A connection to a list of items."""
@@ -2674,7 +2674,7 @@ type SpiritualConditionsConnection {
 
 input SpiritualConditionsCreateInput {
   conditions: ConditionsCreateOneWithoutSpiritualInput!
-  corruption: CorruptionConditionCreateOneWithoutSpiritualConditionsInput!
+  corruption: CorruptionCreateOneWithoutSpiritualConditionsInput!
 }
 
 input SpiritualConditionsCreateOneWithoutConditionsInput {
@@ -2688,7 +2688,7 @@ input SpiritualConditionsCreateOneWithoutCorruptionInput {
 }
 
 input SpiritualConditionsCreateWithoutConditionsInput {
-  corruption: CorruptionConditionCreateOneWithoutSpiritualConditionsInput!
+  corruption: CorruptionCreateOneWithoutSpiritualConditionsInput!
 }
 
 input SpiritualConditionsCreateWithoutCorruptionInput {
@@ -2758,7 +2758,7 @@ input SpiritualConditionsSubscriptionWhereInput {
 
 input SpiritualConditionsUpdateInput {
   conditions: ConditionsUpdateOneWithoutSpiritualInput
-  corruption: CorruptionConditionUpdateOneWithoutSpiritualConditionsInput
+  corruption: CorruptionUpdateOneWithoutSpiritualConditionsInput
 }
 
 input SpiritualConditionsUpdateOneWithoutConditionsInput {
@@ -2778,7 +2778,7 @@ input SpiritualConditionsUpdateOneWithoutCorruptionInput {
 }
 
 input SpiritualConditionsUpdateWithoutConditionsDataInput {
-  corruption: CorruptionConditionUpdateOneWithoutSpiritualConditionsInput
+  corruption: CorruptionUpdateOneWithoutSpiritualConditionsInput
 }
 
 input SpiritualConditionsUpdateWithoutCorruptionDataInput {
@@ -2845,7 +2845,7 @@ input SpiritualConditionsWhereInput {
   """All values not ending with the given string."""
   id_not_ends_with: ID
   conditions: ConditionsWhereInput
-  corruption: CorruptionConditionWhereInput
+  corruption: CorruptionWhereInput
 }
 
 input SpiritualConditionsWhereUniqueInput {
@@ -2861,8 +2861,8 @@ type Subscription {
   conditions(where: ConditionsSubscriptionWhereInput): ConditionsSubscriptionPayload
   physicalConditions(where: PhysicalConditionsSubscriptionWhereInput): PhysicalConditionsSubscriptionPayload
   spiritualConditions(where: SpiritualConditionsSubscriptionWhereInput): SpiritualConditionsSubscriptionPayload
-  fitnessCondition(where: FitnessConditionSubscriptionWhereInput): FitnessConditionSubscriptionPayload
-  corruptionCondition(where: CorruptionConditionSubscriptionWhereInput): CorruptionConditionSubscriptionPayload
+  fitness(where: FitnessSubscriptionWhereInput): FitnessSubscriptionPayload
+  corruption(where: CorruptionSubscriptionWhereInput): CorruptionSubscriptionPayload
 }
 
 type User implements Node {

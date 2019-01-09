@@ -1,4 +1,4 @@
-#import Event,Project,Creature,Attributes,Conditions,PhysicalConditions,SpiritualConditions,FitnessCondition,CorruptionCondition,EventRole from "./generated/prisma.graphql"
+#import Event,Project,Creature,Attributes,Conditions,PhysicalConditions,SpiritualConditions,Fitness,Corruption,EventRole from "./generated/prisma.graphql"
 #----------TYPES----------
 type User {
   id: ID!
@@ -85,15 +85,15 @@ input AttributesInput {
 }
 
 input ConditionsInput {
-  physical: PhysicalConditions!
-  spiritual: SpiritualConditions!  
+  physical: PhysicalConditionsInput!
+  spiritual: SpiritualConditionsInput!
 }
 
-input PhysicalConditions {
+input PhysicalConditionsInput {
   fitness: FitnessInput!
 }
 
-input SpiritualConditions {
+input SpiritualConditionsInput {
   corruption: CorruptionInput!
 }
 
@@ -140,8 +140,27 @@ input uAttributesInput {
 }
 
 input uConditionsInput {
-  fitness: FitnessInput
-  corruption: CorruptionInput
+  physical: uPhysicalConditionsInput
+  spiritual: uSpiritualConditionsInput
+}
+
+input uSpiritualConditionsInput {
+  corruption: uCorruptionInput
+}
+
+input uPhysicalConditionsInput {
+  fitness: uFitnessInput
+}
+
+input uCorruptionInput {
+  current: Int
+  threshold: Int
+  permanent: Int
+}
+
+input uFitnessInput {
+  toughness: Int
+  painThreshold: Int
 }
 
 input uUserInput {

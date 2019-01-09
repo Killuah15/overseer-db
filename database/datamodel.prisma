@@ -64,25 +64,25 @@ type Conditions {
 type PhysicalConditions {
   id: ID! @unique
   conditions: Conditions! @relation(name: "ConditionsByPhysicalCondition", onDelete: SET_NULL)
-  fitness: FitnessCondition! @relation(name: "PhysicalConditionsByFitnessConditions", onDelete: CASCADE)
+  fitness: Fitness! @relation(name: "PhysicalConditionsByFitness", onDelete: CASCADE)
 }
 
 type SpiritualConditions {
   id: ID! @unique
   conditions: Conditions! @relation(name: "ConditionsBySpiritualCondition", onDelete: SET_NULL)
-  corruption: CorruptionCondition! @relation(name: "CorruptionConditionsBySpiritualConditions", onDelete: CASCADE)
+  corruption: Corruption! @relation(name: "CorruptionBySpiritualConditions", onDelete: CASCADE)
 }
 
-type FitnessCondition {
+type Fitness {
   id: ID! @unique
-  physicalConditions: PhysicalConditions! @relation(name: "PhysicalConditionsByFitnessConditions", onDelete: SET_NULL)
+  physicalConditions: PhysicalConditions! @relation(name: "PhysicalConditionsByFitness", onDelete: SET_NULL)
   toughness: Int!
   painThreshold: Int!
 }
 
-type CorruptionCondition {
+type Corruption {
   id: ID! @unique
-  spiritualConditions: SpiritualConditions! @relation(name: "CorruptionConditionsBySpiritualConditions", onDelete: SET_NULL)
+  spiritualConditions: SpiritualConditions! @relation(name: "CorruptionBySpiritualConditions", onDelete: SET_NULL)
   current: Int!
   threshold: Int!
   permanent: Int!
