@@ -31,6 +31,8 @@
     "prisma-binding": "^2.1.6"
   },
   "devDependencies": {
+    "env-cmd": "^8.0.2",
+    "graphql-cli": "^3.0.4",
     "heroku": "^7.19.4",
     "prisma": "^1.23.4"
   }

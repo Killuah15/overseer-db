@@ -1,4 +1,4 @@
-#import Event,Project,Creature,Attributes,Conditions,PhysicalConditions,SpiritualConditions,Fitness,Corruption,EventRole from "./generated/prisma.graphql"
+#import Event,Project,Creature,Attributes,Conditions,PhysicalConditions,SpiritualConditions,Fitness,Corruption,EventRole,Rulebook from "./generated/prisma.graphql"
 #----------TYPES----------
 type User {
   id: ID!
