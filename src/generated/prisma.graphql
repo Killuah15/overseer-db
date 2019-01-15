@@ -1,5 +1,5 @@
 # source: https://overseer-db.herokuapp.com/overseer-db/dev
-# timestamp: Wed Jan 09 2019 18:37:00 GMT+0100 (GMT+01:00)
+# timestamp: Tue Jan 15 2019 18:38:18 GMT+0100 (GMT+01:00)
 
 type AggregateAttributes {
   count: Int!
@@ -1422,6 +1422,7 @@ type Event implements Node {
   title: String!
   description: String
   eventRole: EventRole!
+  index: Int!
   project(where: ProjectWhereInput): Project!
   creatures(where: CreatureWhereInput, orderBy: CreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creature!]
 }
@@ -1440,6 +1441,7 @@ input EventCreateInput {
   title: String!
   description: String
   eventRole: EventRole!
+  index: Int!
   author: UserCreateOneWithoutEventsInput!
   project: ProjectCreateOneWithoutEventsInput!
   creatures: CreatureCreateManyWithoutEventInput
@@ -1464,6 +1466,7 @@ input EventCreateWithoutAuthorInput {
   title: String!
   description: String
   eventRole: EventRole!
+  index: Int!
   project: ProjectCreateOneWithoutEventsInput!
   creatures: CreatureCreateManyWithoutEventInput
 }
@@ -1472,6 +1475,7 @@ input EventCreateWithoutCreaturesInput {
   title: String!
   description: String
   eventRole: EventRole!
+  index: Int!
   author: UserCreateOneWithoutEventsInput!
   project: ProjectCreateOneWithoutEventsInput!
 }
@@ -1480,6 +1484,7 @@ input EventCreateWithoutProjectInput {
   title: String!
   description: String
   eventRole: EventRole!
+  index: Int!
   author: UserCreateOneWithoutEventsInput!
   creatures: CreatureCreateManyWithoutEventInput
 }
@@ -1502,6 +1507,8 @@ enum EventOrderByInput {
   description_DESC
   eventRole_ASC
   eventRole_DESC
+  index_ASC
+  index_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1513,6 +1520,7 @@ type EventPreviousValues {
   title: String!
   description: String
   eventRole: EventRole!
+  index: Int!
 }
 
 enum EventRole {
@@ -1564,6 +1572,7 @@ input EventUpdateInput {
   title: String
   description: String
   eventRole: EventRole
+  index: Int
   author: UserUpdateOneWithoutEventsInput
   project: ProjectUpdateOneWithoutEventsInput
   creatures: CreatureUpdateManyWithoutEventInput
@@ -1599,6 +1608,7 @@ input EventUpdateWithoutAuthorDataInput {
   title: String
   description: String
   eventRole: EventRole
+  index: Int
   project: ProjectUpdateOneWithoutEventsInput
   creatures: CreatureUpdateManyWithoutEventInput
 }
@@ -1607,6 +1617,7 @@ input EventUpdateWithoutCreaturesDataInput {
   title: String
   description: String
   eventRole: EventRole
+  index: Int
   author: UserUpdateOneWithoutEventsInput
   project: ProjectUpdateOneWithoutEventsInput
 }
@@ -1615,6 +1626,7 @@ input EventUpdateWithoutProjectDataInput {
   title: String
   description: String
   eventRole: EventRole
+  index: Int
   author: UserUpdateOneWithoutEventsInput
   creatures: CreatureUpdateManyWithoutEventInput
 }
@@ -1785,6 +1797,28 @@ input EventWhereInput {
 
   """All values that are not contained in given list."""
   eventRole_not_in: [EventRole!]
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
   author: UserWhereInput
   project: ProjectWhereInput
   creatures_every: CreatureWhereInput
@@ -2316,6 +2350,7 @@ type Project implements Node {
   id: ID!
   title: String!
   description: String
+  rulebook: Rulebook!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
   author(where: UserWhereInput): User!
 }
@@ -2333,6 +2368,7 @@ type ProjectConnection {
 input ProjectCreateInput {
   title: String!
   description: String
+  rulebook: Rulebook!
   events: EventCreateManyWithoutProjectInput
   author: UserCreateOneWithoutProjectsInput!
 }
@@ -2350,12 +2386,14 @@ input ProjectCreateOneWithoutEventsInput {
 input ProjectCreateWithoutAuthorInput {
   title: String!
   description: String
+  rulebook: Rulebook!
   events: EventCreateManyWithoutProjectInput
 }
 
 input ProjectCreateWithoutEventsInput {
   title: String!
   description: String
+  rulebook: Rulebook!
   author: UserCreateOneWithoutProjectsInput!
 }
 
@@ -2375,6 +2413,8 @@ enum ProjectOrderByInput {
   title_DESC
   description_ASC
   description_DESC
+  rulebook_ASC
+  rulebook_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -2385,6 +2425,7 @@ type ProjectPreviousValues {
   id: ID!
   title: String!
   description: String
+  rulebook: Rulebook!
 }
 
 type ProjectSubscriptionPayload {
@@ -2429,6 +2470,7 @@ input ProjectSubscriptionWhereInput {
 input ProjectUpdateInput {
   title: String
   description: String
+  rulebook: Rulebook
   events: EventUpdateManyWithoutProjectInput
   author: UserUpdateOneWithoutProjectsInput
 }
@@ -2453,12 +2495,14 @@ input ProjectUpdateOneWithoutEventsInput {
 input ProjectUpdateWithoutAuthorDataInput {
   title: String
   description: String
+  rulebook: Rulebook
   events: EventUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateWithoutEventsDataInput {
   title: String
   description: String
+  rulebook: Rulebook
   author: UserUpdateOneWithoutProjectsInput
 }
 
@@ -2607,6 +2651,16 @@ input ProjectWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  rulebook: Rulebook
+
+  """All values that are not equal to given value."""
+  rulebook_not: Rulebook
+
+  """All values that are contained in given list."""
+  rulebook_in: [Rulebook!]
+
+  """All values that are not contained in given list."""
+  rulebook_not_in: [Rulebook!]
   events_every: EventWhereInput
   events_some: EventWhereInput
   events_none: EventWhereInput
@@ -2654,6 +2708,12 @@ type Query {
     """The ID of an object"""
     id: ID!
   ): Node
+}
+
+enum Rulebook {
+  SYMBAROUM
+  COC
+  DSA
 }
 
 type SpiritualConditions implements Node {

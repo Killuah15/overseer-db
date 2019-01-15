@@ -1,5 +1,6 @@
 import signup from './_Mutations/signup'
 import login from './_Mutations/login'
+import logout from './_Mutations/logout';
 import createProject from './_Mutations/Create/createProject'
 import createEvent from './_Mutations/Create/createEvent'
 import createCreature from './_Mutations/Create/createCreature'
@@ -15,6 +16,7 @@ import updateCurrentUser from './_Mutations/Update/updateCurrentUser';
 const Mutation = {
   signup,
   login,
+  logout,
   createProject,
   createEvent,
   createCreature,

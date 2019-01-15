@@ -1,15 +1,13 @@
-import {
-    getUserID
-  } from '../../../utils/Cryptic'
+import { getUserID } from "../../../utils/Cryptic";
 
 const createProject = async (
   parent,
-  { title, description },
+  { title, description, rulebook },
   { prisma, request },
   info
 ) => {
   //get UserID stored in sessionStorage (through jwt)
-  const uid = await getUserID(request)
+  const uid = await getUserID(request);
 
   //create Project on the database - map inputs to DB graphql Mutation
   const project = await prisma.mutation.createProject(
@@ -17,6 +15,7 @@ const createProject = async (
       data: {
         title,
         description,
+        rulebook,
         author: {
           connect: {
             id: uid
@@ -25,9 +24,9 @@ const createProject = async (
       }
     },
     info
-  )
+  );
 
-  return project
-}
+  return project;
+};
 
-export default createProject
+export default createProject;

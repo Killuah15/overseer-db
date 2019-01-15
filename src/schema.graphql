@@ -20,7 +20,7 @@ type Query {
   users: [User!]!
   projects: [Project!]!
   events(projectID: ID, projectTitle: String): [Event!]!
-  creatures(projectID: ID, projectTitle: String, eventID: ID, eventTitle: String): [Creature!]!
+  creatures(projectID: ID, projectTitle: String, eventID: ID, eventTitle: String, allCreatures: Boolean): [Creature!]!
   currentUser: User!
   project(id: ID!): Project!
   event(id: ID!): Event!
@@ -30,7 +30,8 @@ type Query {
 type Mutation {
   signup(data: SignupInput!): AuthPayload!
   login(data: LoginInput!): AuthPayload!
-  createProject(title: String!, description: String): Project!
+  logout: User!
+  createProject(title: String!, description: String, rulebook: Rulebook!): Project!
   createEvent(data: EventInput!): Event!
   createCreature(data: CreatureInput!): Creature!
   deleteCurrentUser: User!
@@ -60,6 +61,7 @@ input EventInput {
   title: String!
   description: String
   eventRole: EventRole!
+  index: Int!
   project: ID!
 }
 
