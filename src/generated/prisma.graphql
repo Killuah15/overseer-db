@@ -1,5 +1,5 @@
 # source: https://overseer-db.herokuapp.com/overseer-db/dev
-# timestamp: Tue Jan 15 2019 18:38:18 GMT+0100 (GMT+01:00)
+# timestamp: Wed Jan 16 2019 14:13:12 GMT+0100 (GMT+01:00)
 
 type AggregateAttributes {
   count: Int!
@@ -973,6 +973,7 @@ type Creature implements Node {
   name: String
   race: String!
   shadow: String
+  rulebook: Rulebook!
   Conditions(where: ConditionsWhereInput): Conditions!
   attributes(where: AttributesWhereInput): Attributes!
 }
@@ -991,6 +992,7 @@ input CreatureCreateInput {
   name: String
   race: String!
   shadow: String
+  rulebook: Rulebook!
   author: UserCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
   Conditions: ConditionsCreateOneWithoutCreatureInput!
@@ -1021,6 +1023,7 @@ input CreatureCreateWithoutAttributesInput {
   name: String
   race: String!
   shadow: String
+  rulebook: Rulebook!
   author: UserCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
   Conditions: ConditionsCreateOneWithoutCreatureInput!
@@ -1030,6 +1033,7 @@ input CreatureCreateWithoutAuthorInput {
   name: String
   race: String!
   shadow: String
+  rulebook: Rulebook!
   event: EventCreateOneWithoutCreaturesInput!
   Conditions: ConditionsCreateOneWithoutCreatureInput!
   attributes: AttributesCreateOneWithoutCreatureInput!
@@ -1039,6 +1043,7 @@ input CreatureCreateWithoutConditionsInput {
   name: String
   race: String!
   shadow: String
+  rulebook: Rulebook!
   author: UserCreateOneWithoutCreaturesInput!
   event: EventCreateOneWithoutCreaturesInput!
   attributes: AttributesCreateOneWithoutCreatureInput!
@@ -1048,6 +1053,7 @@ input CreatureCreateWithoutEventInput {
   name: String
   race: String!
   shadow: String
+  rulebook: Rulebook!
   author: UserCreateOneWithoutCreaturesInput!
   Conditions: ConditionsCreateOneWithoutCreatureInput!
   attributes: AttributesCreateOneWithoutCreatureInput!
@@ -1071,6 +1077,8 @@ enum CreatureOrderByInput {
   race_DESC
   shadow_ASC
   shadow_DESC
+  rulebook_ASC
+  rulebook_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1082,6 +1090,7 @@ type CreaturePreviousValues {
   name: String
   race: String!
   shadow: String
+  rulebook: Rulebook!
 }
 
 type CreatureSubscriptionPayload {
@@ -1127,6 +1136,7 @@ input CreatureUpdateInput {
   name: String
   race: String
   shadow: String
+  rulebook: Rulebook
   author: UserUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
   Conditions: ConditionsUpdateOneWithoutCreatureInput
@@ -1171,6 +1181,7 @@ input CreatureUpdateWithoutAttributesDataInput {
   name: String
   race: String
   shadow: String
+  rulebook: Rulebook
   author: UserUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
   Conditions: ConditionsUpdateOneWithoutCreatureInput
@@ -1180,6 +1191,7 @@ input CreatureUpdateWithoutAuthorDataInput {
   name: String
   race: String
   shadow: String
+  rulebook: Rulebook
   event: EventUpdateOneWithoutCreaturesInput
   Conditions: ConditionsUpdateOneWithoutCreatureInput
   attributes: AttributesUpdateOneWithoutCreatureInput
@@ -1189,6 +1201,7 @@ input CreatureUpdateWithoutConditionsDataInput {
   name: String
   race: String
   shadow: String
+  rulebook: Rulebook
   author: UserUpdateOneWithoutCreaturesInput
   event: EventUpdateOneWithoutCreaturesInput
   attributes: AttributesUpdateOneWithoutCreatureInput
@@ -1198,6 +1211,7 @@ input CreatureUpdateWithoutEventDataInput {
   name: String
   race: String
   shadow: String
+  rulebook: Rulebook
   author: UserUpdateOneWithoutCreaturesInput
   Conditions: ConditionsUpdateOneWithoutCreatureInput
   attributes: AttributesUpdateOneWithoutCreatureInput
@@ -1404,6 +1418,16 @@ input CreatureWhereInput {
 
   """All values not ending with the given string."""
   shadow_not_ends_with: String
+  rulebook: Rulebook
+
+  """All values that are not equal to given value."""
+  rulebook_not: Rulebook
+
+  """All values that are contained in given list."""
+  rulebook_in: [Rulebook!]
+
+  """All values that are not contained in given list."""
+  rulebook_not_in: [Rulebook!]
   author: UserWhereInput
   event: EventWhereInput
   Conditions: ConditionsWhereInput

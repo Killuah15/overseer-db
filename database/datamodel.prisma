@@ -38,6 +38,7 @@ type Creature {
   name: String
   race: String!
   shadow: String
+  rulebook: Rulebook!
   Conditions: Conditions! @relation(name: "ConditionsByCreature", onDelete: CASCADE)
   attributes: Attributes! @relation(name: "AttributesByCreature", onDelete: CASCADE)
 }

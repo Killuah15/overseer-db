@@ -5,12 +5,19 @@ import { validateArg } from "../../utils/Validation";
 const creatures = async (parent, args, { prisma, request }, info) => {
   let opArgs = {};
 
-  if (args.allCreatures) {
+  if (args.fromRulebook) {
     opArgs.where = {
-      author: {
-        id: await getUserID(request)
-      }
-    }
+      AND: [
+        {
+          rulebook: await validateArg(args.fromRulebook)
+        },
+        {
+          author: {
+            id: "cjqxu6075005y0961a4y57e8o"
+          }
+        }
+      ]
+    };
   } else {
     opArgs.where = {
       AND: [
@@ -44,7 +51,7 @@ const creatures = async (parent, args, { prisma, request }, info) => {
           }
         }
       ]
-    }
+    };
   }
 
   return prisma.query.creatures(opArgs, info);
