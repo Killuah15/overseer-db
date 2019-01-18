@@ -27,6 +27,8 @@ const events = async (parent, args, { prisma, request }, info) => {
     ]
   }
 
+  opArgs.orderBy = 'index_ASC'
+
   return prisma.query.events(opArgs, info)
 }
 

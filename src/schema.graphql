@@ -121,6 +121,7 @@ input uProjectInput {
 input uEventInput {
   title: String
   description: String
+  index: Int!
   eventRole: EventRole
 }
 
