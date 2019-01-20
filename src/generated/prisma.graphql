@@ -1,10 +1,11 @@
 # source: https://overseer-db.herokuapp.com/overseer-db/dev
-# timestamp: Sun Jan 20 2019 04:31:56 GMT+0100 (GMT+01:00)
+# timestamp: Sun Jan 20 2019 21:36:49 GMT+0100 (GMT+01:00)
 
 type Ability implements Node {
   id: ID!
   creature(where: CreatureWhereInput): Creature!
   currentRank: SymAbilityRank!
+  title: String!
   description(where: AbilityDescriptionWhereInput, orderBy: AbilityDescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AbilityDescription!]
 }
 
@@ -20,6 +21,7 @@ type AbilityConnection {
 
 input AbilityCreateInput {
   currentRank: SymAbilityRank!
+  title: String!
   creature: CreatureCreateOneWithoutAbilitiesInput!
   description: AbilityDescriptionCreateManyWithoutAbilityInput
 }
@@ -36,11 +38,13 @@ input AbilityCreateOneWithoutDescriptionInput {
 
 input AbilityCreateWithoutCreatureInput {
   currentRank: SymAbilityRank!
+  title: String!
   description: AbilityDescriptionCreateManyWithoutAbilityInput
 }
 
 input AbilityCreateWithoutDescriptionInput {
   currentRank: SymAbilityRank!
+  title: String!
   creature: CreatureCreateOneWithoutAbilitiesInput!
 }
 
@@ -313,6 +317,8 @@ enum AbilityOrderByInput {
   id_DESC
   currentRank_ASC
   currentRank_DESC
+  title_ASC
+  title_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -322,6 +328,7 @@ enum AbilityOrderByInput {
 type AbilityPreviousValues {
   id: ID!
   currentRank: SymAbilityRank!
+  title: String!
 }
 
 type AbilitySubscriptionPayload {
@@ -365,6 +372,7 @@ input AbilitySubscriptionWhereInput {
 
 input AbilityUpdateInput {
   currentRank: SymAbilityRank
+  title: String
   creature: CreatureUpdateOneWithoutAbilitiesInput
   description: AbilityDescriptionUpdateManyWithoutAbilityInput
 }
@@ -388,11 +396,13 @@ input AbilityUpdateOneWithoutDescriptionInput {
 
 input AbilityUpdateWithoutCreatureDataInput {
   currentRank: SymAbilityRank
+  title: String
   description: AbilityDescriptionUpdateManyWithoutAbilityInput
 }
 
 input AbilityUpdateWithoutDescriptionDataInput {
   currentRank: SymAbilityRank
+  title: String
   creature: CreatureUpdateOneWithoutAbilitiesInput
 }
 
@@ -471,6 +481,46 @@ input AbilityWhereInput {
 
   """All values that are not contained in given list."""
   currentRank_not_in: [SymAbilityRank!]
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
   creature: CreatureWhereInput
   description_every: AbilityDescriptionWhereInput
   description_some: AbilityDescriptionWhereInput
@@ -5556,7 +5606,7 @@ type PSymLocalAbility implements Node {
   id: ID!
   creature(where: PSymCreatureWhereInput): PSymCreature!
   rank: SymAbilityRank!
-  presets(where: PSymPresetAbilityWhereInput, orderBy: PSymPresetAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymPresetAbility!]
+  preset(where: PSymPresetAbilityWhereInput): PSymPresetAbility
 }
 
 """A connection to a list of items."""
@@ -5572,7 +5622,7 @@ type PSymLocalAbilityConnection {
 input PSymLocalAbilityCreateInput {
   rank: SymAbilityRank!
   creature: PSymCreatureCreateOneWithoutAbilitiesInput!
-  presets: PSymPresetAbilityCreateManyInput
+  preset: PSymPresetAbilityCreateOneInput
 }
 
 input PSymLocalAbilityCreateManyWithoutCreatureInput {
@@ -5582,7 +5632,7 @@ input PSymLocalAbilityCreateManyWithoutCreatureInput {
 
 input PSymLocalAbilityCreateWithoutCreatureInput {
   rank: SymAbilityRank!
-  presets: PSymPresetAbilityCreateManyInput
+  preset: PSymPresetAbilityCreateOneInput
 }
 
 """An edge in a connection."""
@@ -5652,7 +5702,7 @@ input PSymLocalAbilitySubscriptionWhereInput {
 input PSymLocalAbilityUpdateInput {
   rank: SymAbilityRank
   creature: PSymCreatureUpdateOneWithoutAbilitiesInput
-  presets: PSymPresetAbilityUpdateManyInput
+  preset: PSymPresetAbilityUpdateOneInput
 }
 
 input PSymLocalAbilityUpdateManyWithoutCreatureInput {
@@ -5666,7 +5716,7 @@ input PSymLocalAbilityUpdateManyWithoutCreatureInput {
 
 input PSymLocalAbilityUpdateWithoutCreatureDataInput {
   rank: SymAbilityRank
-  presets: PSymPresetAbilityUpdateManyInput
+  preset: PSymPresetAbilityUpdateOneInput
 }
 
 input PSymLocalAbilityUpdateWithWhereUniqueWithoutCreatureInput {
@@ -5740,9 +5790,7 @@ input PSymLocalAbilityWhereInput {
   """All values that are not contained in given list."""
   rank_not_in: [SymAbilityRank!]
   creature: PSymCreatureWhereInput
-  presets_every: PSymPresetAbilityWhereInput
-  presets_some: PSymPresetAbilityWhereInput
-  presets_none: PSymPresetAbilityWhereInput
+  preset: PSymPresetAbilityWhereInput
 }
 
 input PSymLocalAbilityWhereUniqueInput {
@@ -5770,9 +5818,9 @@ input PSymPresetAbilityCreateInput {
   description: PSymAbilityDescriptionCreateManyWithoutAbilityInput
 }
 
-input PSymPresetAbilityCreateManyInput {
-  create: [PSymPresetAbilityCreateInput!]
-  connect: [PSymPresetAbilityWhereUniqueInput!]
+input PSymPresetAbilityCreateOneInput {
+  create: PSymPresetAbilityCreateInput
+  connect: PSymPresetAbilityWhereUniqueInput
 }
 
 input PSymPresetAbilityCreateOneWithoutDescriptionInput {
@@ -5858,13 +5906,13 @@ input PSymPresetAbilityUpdateInput {
   description: PSymAbilityDescriptionUpdateManyWithoutAbilityInput
 }
 
-input PSymPresetAbilityUpdateManyInput {
-  create: [PSymPresetAbilityCreateInput!]
-  connect: [PSymPresetAbilityWhereUniqueInput!]
-  disconnect: [PSymPresetAbilityWhereUniqueInput!]
-  delete: [PSymPresetAbilityWhereUniqueInput!]
-  update: [PSymPresetAbilityUpdateWithWhereUniqueNestedInput!]
-  upsert: [PSymPresetAbilityUpsertWithWhereUniqueNestedInput!]
+input PSymPresetAbilityUpdateOneInput {
+  create: PSymPresetAbilityCreateInput
+  connect: PSymPresetAbilityWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PSymPresetAbilityUpdateDataInput
+  upsert: PSymPresetAbilityUpsertNestedInput
 }
 
 input PSymPresetAbilityUpdateOneWithoutDescriptionInput {
@@ -5879,20 +5927,14 @@ input PSymPresetAbilityUpdateWithoutDescriptionDataInput {
   title: String
 }
 
-input PSymPresetAbilityUpdateWithWhereUniqueNestedInput {
-  where: PSymPresetAbilityWhereUniqueInput!
-  data: PSymPresetAbilityUpdateDataInput!
+input PSymPresetAbilityUpsertNestedInput {
+  update: PSymPresetAbilityUpdateDataInput!
+  create: PSymPresetAbilityCreateInput!
 }
 
 input PSymPresetAbilityUpsertWithoutDescriptionInput {
   update: PSymPresetAbilityUpdateWithoutDescriptionDataInput!
   create: PSymPresetAbilityCreateWithoutDescriptionInput!
-}
-
-input PSymPresetAbilityUpsertWithWhereUniqueNestedInput {
-  where: PSymPresetAbilityWhereUniqueInput!
-  update: PSymPresetAbilityUpdateDataInput!
-  create: PSymPresetAbilityCreateInput!
 }
 
 input PSymPresetAbilityWhereInput {

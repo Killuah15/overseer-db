@@ -1,23 +1,15 @@
-import { getUserID } from "../../utils/Cryptic";
-import { validateArg } from "../../utils/Validation";
+import { getUserID } from "../../utils/Cryptic"
+import { validateArg } from "../../utils/Validation"
 
 //Get all Creatures of the Users Project OR Event
 const creatures = async (parent, args, { prisma, request }, info) => {
-  let opArgs = {};
+  let opArgs = {}
 
   if (args.fromRulebook) {
     opArgs.where = {
-      AND: [
-        {
-          rulebook: await validateArg(args.fromRulebook)
-        },
-        {
-          author: {
-            id: "cjqxu6075005y0961a4y57e8o"
-          }
-        }
-      ]
-    };
+      rulebook: validateArg(args.fromRulebook)
+    }
+    return prisma.query.creatures(opArgs, info);
   } else {
     opArgs.where = {
       AND: [
@@ -51,10 +43,9 @@ const creatures = async (parent, args, { prisma, request }, info) => {
           }
         }
       ]
-    };
+    }
+    return prisma.query.creatures(opArgs, info);
   }
-
-  return prisma.query.creatures(opArgs, info);
 };
 
 //creatures(projectID: ID, projectTitle: String, eventID: ID, eventTitle: String): [Creature!]!

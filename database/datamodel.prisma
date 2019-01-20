@@ -46,8 +46,9 @@ type Creature {
 
 type Ability {
   id: ID! @unique
-  creature: Creature! @relation(name: "AbilitiesByCreature", onDelete: CASCADE)
+  creature: Creature! @relation(name: "AbilitiesByCreature", onDelete: SET_NULL)
   currentRank: SymAbilityRank!
+  title: String!
   description: [AbilityDescription!]! @relation(name: "AbilityDescriptionByAbility", onDelete: CASCADE)
 }
 
@@ -122,7 +123,7 @@ type PSymLocalAbility {
   id: ID! @unique
   creature: PSymCreature! @relation(name: "PSymCreatureByPSymAbility", onDelete: SET_NULL)
   rank: SymAbilityRank!
-  presets: [PSymPresetAbility!]!
+  preset: PSymPresetAbility
 }
 
 type PSymPresetAbility {

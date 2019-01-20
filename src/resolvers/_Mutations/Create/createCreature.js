@@ -22,6 +22,30 @@ const createCreature = async (parent, { data }, { prisma, request }, info) => {
     defense
   } = data.attributes
 
+  let abilities = await data.abilities.map((ability, index) => ({
+    currentRank: ability.currentRank,
+    title: ability.title,
+    description: {
+      create:[
+        {
+          type: ability.descriptions[0].type,
+          rank: ability.descriptions[0].rank,
+          description: ability.descriptions[0].description
+        },
+        {
+          type: ability.descriptions[1].type,
+          rank: ability.descriptions[1].rank,
+          description: ability.descriptions[1].description
+        },
+        {
+          type: ability.descriptions[2].type,
+          rank: ability.descriptions[2].rank,
+          description: ability.descriptions[2].description
+        }
+      ]
+    }
+  }))
+
   //create Creature on the database - map inputs to DB graphql Mutation
   const creature = await prisma.mutation.createCreature(
     {
@@ -74,11 +98,16 @@ const createCreature = async (parent, { data }, { prisma, request }, info) => {
             vigilant,
             defense
           }
+        },
+        abilities: {
+          create: abilities
         }
       }
     },
     info
   )
+
+  console.log("creature in DB: " + JSON.stringify(creature, undefined, 2))
 
   return creature
 }
