@@ -1,5 +1,5 @@
 # source: https://overseer-db.herokuapp.com/overseer-db/dev
-# timestamp: Sun Jan 20 2019 03:59:46 GMT+0100 (GMT+01:00)
+# timestamp: Sun Jan 20 2019 04:31:56 GMT+0100 (GMT+01:00)
 
 type Ability implements Node {
   id: ID!
@@ -545,15 +545,19 @@ type AggregatePSpiritualConditions {
   count: Int!
 }
 
-type AggregatePSymAbility {
-  count: Int!
-}
-
 type AggregatePSymAbilityDescription {
   count: Int!
 }
 
 type AggregatePSymCreature {
+  count: Int!
+}
+
+type AggregatePSymLocalAbility {
+  count: Int!
+}
+
+type AggregatePSymPresetAbility {
   count: Int!
 }
 
@@ -2676,7 +2680,7 @@ type Mutation {
   createFitness(data: FitnessCreateInput!): Fitness!
   createCorruption(data: CorruptionCreateInput!): Corruption!
   createPSymCreature(data: PSymCreatureCreateInput!): PSymCreature!
-  createPSymAbility(data: PSymAbilityCreateInput!): PSymAbility!
+  createPSymLocalAbility(data: PSymLocalAbilityCreateInput!): PSymLocalAbility!
   createPSymAbilityDescription(data: PSymAbilityDescriptionCreateInput!): PSymAbilityDescription!
   createPAttributes(data: PAttributesCreateInput!): PAttributes!
   createPConditions(data: PConditionsCreateInput!): PConditions!
@@ -2684,6 +2688,7 @@ type Mutation {
   createPSpiritualConditions(data: PSpiritualConditionsCreateInput!): PSpiritualConditions!
   createPFitness(data: PFitnessCreateInput!): PFitness!
   createPCorruption(data: PCorruptionCreateInput!): PCorruption!
+  createPSymPresetAbility(data: PSymPresetAbilityCreateInput!): PSymPresetAbility!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
@@ -2697,7 +2702,7 @@ type Mutation {
   updateFitness(data: FitnessUpdateInput!, where: FitnessWhereUniqueInput!): Fitness
   updateCorruption(data: CorruptionUpdateInput!, where: CorruptionWhereUniqueInput!): Corruption
   updatePSymCreature(data: PSymCreatureUpdateInput!, where: PSymCreatureWhereUniqueInput!): PSymCreature
-  updatePSymAbility(data: PSymAbilityUpdateInput!, where: PSymAbilityWhereUniqueInput!): PSymAbility
+  updatePSymLocalAbility(data: PSymLocalAbilityUpdateInput!, where: PSymLocalAbilityWhereUniqueInput!): PSymLocalAbility
   updatePSymAbilityDescription(data: PSymAbilityDescriptionUpdateInput!, where: PSymAbilityDescriptionWhereUniqueInput!): PSymAbilityDescription
   updatePAttributes(data: PAttributesUpdateInput!, where: PAttributesWhereUniqueInput!): PAttributes
   updatePConditions(data: PConditionsUpdateInput!, where: PConditionsWhereUniqueInput!): PConditions
@@ -2705,6 +2710,7 @@ type Mutation {
   updatePSpiritualConditions(data: PSpiritualConditionsUpdateInput!, where: PSpiritualConditionsWhereUniqueInput!): PSpiritualConditions
   updatePFitness(data: PFitnessUpdateInput!, where: PFitnessWhereUniqueInput!): PFitness
   updatePCorruption(data: PCorruptionUpdateInput!, where: PCorruptionWhereUniqueInput!): PCorruption
+  updatePSymPresetAbility(data: PSymPresetAbilityUpdateInput!, where: PSymPresetAbilityWhereUniqueInput!): PSymPresetAbility
   deleteUser(where: UserWhereUniqueInput!): User
   deleteProject(where: ProjectWhereUniqueInput!): Project
   deleteEvent(where: EventWhereUniqueInput!): Event
@@ -2718,7 +2724,7 @@ type Mutation {
   deleteFitness(where: FitnessWhereUniqueInput!): Fitness
   deleteCorruption(where: CorruptionWhereUniqueInput!): Corruption
   deletePSymCreature(where: PSymCreatureWhereUniqueInput!): PSymCreature
-  deletePSymAbility(where: PSymAbilityWhereUniqueInput!): PSymAbility
+  deletePSymLocalAbility(where: PSymLocalAbilityWhereUniqueInput!): PSymLocalAbility
   deletePSymAbilityDescription(where: PSymAbilityDescriptionWhereUniqueInput!): PSymAbilityDescription
   deletePAttributes(where: PAttributesWhereUniqueInput!): PAttributes
   deletePConditions(where: PConditionsWhereUniqueInput!): PConditions
@@ -2726,6 +2732,7 @@ type Mutation {
   deletePSpiritualConditions(where: PSpiritualConditionsWhereUniqueInput!): PSpiritualConditions
   deletePFitness(where: PFitnessWhereUniqueInput!): PFitness
   deletePCorruption(where: PCorruptionWhereUniqueInput!): PCorruption
+  deletePSymPresetAbility(where: PSymPresetAbilityWhereUniqueInput!): PSymPresetAbility
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
@@ -2739,7 +2746,7 @@ type Mutation {
   upsertFitness(where: FitnessWhereUniqueInput!, create: FitnessCreateInput!, update: FitnessUpdateInput!): Fitness!
   upsertCorruption(where: CorruptionWhereUniqueInput!, create: CorruptionCreateInput!, update: CorruptionUpdateInput!): Corruption!
   upsertPSymCreature(where: PSymCreatureWhereUniqueInput!, create: PSymCreatureCreateInput!, update: PSymCreatureUpdateInput!): PSymCreature!
-  upsertPSymAbility(where: PSymAbilityWhereUniqueInput!, create: PSymAbilityCreateInput!, update: PSymAbilityUpdateInput!): PSymAbility!
+  upsertPSymLocalAbility(where: PSymLocalAbilityWhereUniqueInput!, create: PSymLocalAbilityCreateInput!, update: PSymLocalAbilityUpdateInput!): PSymLocalAbility!
   upsertPSymAbilityDescription(where: PSymAbilityDescriptionWhereUniqueInput!, create: PSymAbilityDescriptionCreateInput!, update: PSymAbilityDescriptionUpdateInput!): PSymAbilityDescription!
   upsertPAttributes(where: PAttributesWhereUniqueInput!, create: PAttributesCreateInput!, update: PAttributesUpdateInput!): PAttributes!
   upsertPConditions(where: PConditionsWhereUniqueInput!, create: PConditionsCreateInput!, update: PConditionsUpdateInput!): PConditions!
@@ -2747,6 +2754,7 @@ type Mutation {
   upsertPSpiritualConditions(where: PSpiritualConditionsWhereUniqueInput!, create: PSpiritualConditionsCreateInput!, update: PSpiritualConditionsUpdateInput!): PSpiritualConditions!
   upsertPFitness(where: PFitnessWhereUniqueInput!, create: PFitnessCreateInput!, update: PFitnessUpdateInput!): PFitness!
   upsertPCorruption(where: PCorruptionWhereUniqueInput!, create: PCorruptionCreateInput!, update: PCorruptionUpdateInput!): PCorruption!
+  upsertPSymPresetAbility(where: PSymPresetAbilityWhereUniqueInput!, create: PSymPresetAbilityCreateInput!, update: PSymPresetAbilityUpdateInput!): PSymPresetAbility!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
@@ -2760,7 +2768,7 @@ type Mutation {
   updateManyFitnesses(data: FitnessUpdateInput!, where: FitnessWhereInput): BatchPayload!
   updateManyCorruptions(data: CorruptionUpdateInput!, where: CorruptionWhereInput): BatchPayload!
   updateManyPSymCreatures(data: PSymCreatureUpdateInput!, where: PSymCreatureWhereInput): BatchPayload!
-  updateManyPSymAbilities(data: PSymAbilityUpdateInput!, where: PSymAbilityWhereInput): BatchPayload!
+  updateManyPSymLocalAbilities(data: PSymLocalAbilityUpdateInput!, where: PSymLocalAbilityWhereInput): BatchPayload!
   updateManyPSymAbilityDescriptions(data: PSymAbilityDescriptionUpdateInput!, where: PSymAbilityDescriptionWhereInput): BatchPayload!
   updateManyPAttributeses(data: PAttributesUpdateInput!, where: PAttributesWhereInput): BatchPayload!
   updateManyPConditionses(data: PConditionsUpdateInput!, where: PConditionsWhereInput): BatchPayload!
@@ -2768,6 +2776,7 @@ type Mutation {
   updateManyPSpiritualConditionses(data: PSpiritualConditionsUpdateInput!, where: PSpiritualConditionsWhereInput): BatchPayload!
   updateManyPFitnesses(data: PFitnessUpdateInput!, where: PFitnessWhereInput): BatchPayload!
   updateManyPCorruptions(data: PCorruptionUpdateInput!, where: PCorruptionWhereInput): BatchPayload!
+  updateManyPSymPresetAbilities(data: PSymPresetAbilityUpdateInput!, where: PSymPresetAbilityWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyProjects(where: ProjectWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
@@ -2781,7 +2790,7 @@ type Mutation {
   deleteManyFitnesses(where: FitnessWhereInput): BatchPayload!
   deleteManyCorruptions(where: CorruptionWhereInput): BatchPayload!
   deleteManyPSymCreatures(where: PSymCreatureWhereInput): BatchPayload!
-  deleteManyPSymAbilities(where: PSymAbilityWhereInput): BatchPayload!
+  deleteManyPSymLocalAbilities(where: PSymLocalAbilityWhereInput): BatchPayload!
   deleteManyPSymAbilityDescriptions(where: PSymAbilityDescriptionWhereInput): BatchPayload!
   deleteManyPAttributeses(where: PAttributesWhereInput): BatchPayload!
   deleteManyPConditionses(where: PConditionsWhereInput): BatchPayload!
@@ -2789,6 +2798,7 @@ type Mutation {
   deleteManyPSpiritualConditionses(where: PSpiritualConditionsWhereInput): BatchPayload!
   deleteManyPFitnesses(where: PFitnessWhereInput): BatchPayload!
   deleteManyPCorruptions(where: PCorruptionWhereInput): BatchPayload!
+  deleteManyPSymPresetAbilities(where: PSymPresetAbilityWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -4875,52 +4885,9 @@ input PSpiritualConditionsWhereUniqueInput {
   id: ID
 }
 
-type PSymAbility implements Node {
-  id: ID!
-  creature(where: PSymCreatureWhereInput): PSymCreature!
-  title: String!
-  description(where: PSymAbilityDescriptionWhereInput, orderBy: PSymAbilityDescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymAbilityDescription!]
-}
-
-"""A connection to a list of items."""
-type PSymAbilityConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [PSymAbilityEdge]!
-  aggregate: AggregatePSymAbility!
-}
-
-input PSymAbilityCreateInput {
-  title: String!
-  creature: PSymCreatureCreateOneWithoutAbilitiesInput!
-  description: PSymAbilityDescriptionCreateManyWithoutAbilityInput
-}
-
-input PSymAbilityCreateManyWithoutCreatureInput {
-  create: [PSymAbilityCreateWithoutCreatureInput!]
-  connect: [PSymAbilityWhereUniqueInput!]
-}
-
-input PSymAbilityCreateOneWithoutDescriptionInput {
-  create: PSymAbilityCreateWithoutDescriptionInput
-  connect: PSymAbilityWhereUniqueInput
-}
-
-input PSymAbilityCreateWithoutCreatureInput {
-  title: String!
-  description: PSymAbilityDescriptionCreateManyWithoutAbilityInput
-}
-
-input PSymAbilityCreateWithoutDescriptionInput {
-  title: String!
-  creature: PSymCreatureCreateOneWithoutAbilitiesInput!
-}
-
 type PSymAbilityDescription implements Node {
   id: ID!
-  ability(where: PSymAbilityWhereInput): PSymAbility!
+  ability(where: PSymPresetAbilityWhereInput): PSymPresetAbility!
   type: SymAbilityType!
   rank: SymAbilityRank!
   description: String!
@@ -4940,7 +4907,7 @@ input PSymAbilityDescriptionCreateInput {
   type: SymAbilityType!
   rank: SymAbilityRank!
   description: String!
-  ability: PSymAbilityCreateOneWithoutDescriptionInput!
+  ability: PSymPresetAbilityCreateOneWithoutDescriptionInput!
 }
 
 input PSymAbilityDescriptionCreateManyWithoutAbilityInput {
@@ -5028,7 +4995,7 @@ input PSymAbilityDescriptionUpdateInput {
   type: SymAbilityType
   rank: SymAbilityRank
   description: String
-  ability: PSymAbilityUpdateOneWithoutDescriptionInput
+  ability: PSymPresetAbilityUpdateOneWithoutDescriptionInput
 }
 
 input PSymAbilityDescriptionUpdateManyWithoutAbilityInput {
@@ -5166,222 +5133,10 @@ input PSymAbilityDescriptionWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  ability: PSymAbilityWhereInput
+  ability: PSymPresetAbilityWhereInput
 }
 
 input PSymAbilityDescriptionWhereUniqueInput {
-  id: ID
-}
-
-"""An edge in a connection."""
-type PSymAbilityEdge {
-  """The item at the end of the edge."""
-  node: PSymAbility!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum PSymAbilityOrderByInput {
-  id_ASC
-  id_DESC
-  title_ASC
-  title_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type PSymAbilityPreviousValues {
-  id: ID!
-  title: String!
-}
-
-type PSymAbilitySubscriptionPayload {
-  mutation: MutationType!
-  node: PSymAbility
-  updatedFields: [String!]
-  previousValues: PSymAbilityPreviousValues
-}
-
-input PSymAbilitySubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PSymAbilitySubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PSymAbilitySubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PSymAbilitySubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: PSymAbilityWhereInput
-}
-
-input PSymAbilityUpdateInput {
-  title: String
-  creature: PSymCreatureUpdateOneWithoutAbilitiesInput
-  description: PSymAbilityDescriptionUpdateManyWithoutAbilityInput
-}
-
-input PSymAbilityUpdateManyWithoutCreatureInput {
-  create: [PSymAbilityCreateWithoutCreatureInput!]
-  connect: [PSymAbilityWhereUniqueInput!]
-  disconnect: [PSymAbilityWhereUniqueInput!]
-  delete: [PSymAbilityWhereUniqueInput!]
-  update: [PSymAbilityUpdateWithWhereUniqueWithoutCreatureInput!]
-  upsert: [PSymAbilityUpsertWithWhereUniqueWithoutCreatureInput!]
-}
-
-input PSymAbilityUpdateOneWithoutDescriptionInput {
-  create: PSymAbilityCreateWithoutDescriptionInput
-  connect: PSymAbilityWhereUniqueInput
-  delete: Boolean
-  update: PSymAbilityUpdateWithoutDescriptionDataInput
-  upsert: PSymAbilityUpsertWithoutDescriptionInput
-}
-
-input PSymAbilityUpdateWithoutCreatureDataInput {
-  title: String
-  description: PSymAbilityDescriptionUpdateManyWithoutAbilityInput
-}
-
-input PSymAbilityUpdateWithoutDescriptionDataInput {
-  title: String
-  creature: PSymCreatureUpdateOneWithoutAbilitiesInput
-}
-
-input PSymAbilityUpdateWithWhereUniqueWithoutCreatureInput {
-  where: PSymAbilityWhereUniqueInput!
-  data: PSymAbilityUpdateWithoutCreatureDataInput!
-}
-
-input PSymAbilityUpsertWithoutDescriptionInput {
-  update: PSymAbilityUpdateWithoutDescriptionDataInput!
-  create: PSymAbilityCreateWithoutDescriptionInput!
-}
-
-input PSymAbilityUpsertWithWhereUniqueWithoutCreatureInput {
-  where: PSymAbilityWhereUniqueInput!
-  update: PSymAbilityUpdateWithoutCreatureDataInput!
-  create: PSymAbilityCreateWithoutCreatureInput!
-}
-
-input PSymAbilityWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PSymAbilityWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PSymAbilityWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PSymAbilityWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  creature: PSymCreatureWhereInput
-  description_every: PSymAbilityDescriptionWhereInput
-  description_some: PSymAbilityDescriptionWhereInput
-  description_none: PSymAbilityDescriptionWhereInput
-}
-
-input PSymAbilityWhereUniqueInput {
   id: ID
 }
 
@@ -5393,7 +5148,7 @@ type PSymCreature implements Node {
   rulebook: Rulebook!
   Conditions(where: PConditionsWhereInput): PConditions!
   attributes(where: PAttributesWhereInput): PAttributes!
-  abilities(where: PSymAbilityWhereInput, orderBy: PSymAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymAbility!]
+  abilities(where: PSymLocalAbilityWhereInput, orderBy: PSymLocalAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymLocalAbility!]
 }
 
 """A connection to a list of items."""
@@ -5413,7 +5168,7 @@ input PSymCreatureCreateInput {
   rulebook: Rulebook!
   Conditions: PConditionsCreateOneWithoutCreatureInput!
   attributes: PAttributesCreateOneWithoutCreatureInput!
-  abilities: PSymAbilityCreateManyWithoutCreatureInput
+  abilities: PSymLocalAbilityCreateManyWithoutCreatureInput
 }
 
 input PSymCreatureCreateOneWithoutAbilitiesInput {
@@ -5446,7 +5201,7 @@ input PSymCreatureCreateWithoutAttributesInput {
   shadow: String
   rulebook: Rulebook!
   Conditions: PConditionsCreateOneWithoutCreatureInput!
-  abilities: PSymAbilityCreateManyWithoutCreatureInput
+  abilities: PSymLocalAbilityCreateManyWithoutCreatureInput
 }
 
 input PSymCreatureCreateWithoutConditionsInput {
@@ -5455,7 +5210,7 @@ input PSymCreatureCreateWithoutConditionsInput {
   shadow: String
   rulebook: Rulebook!
   attributes: PAttributesCreateOneWithoutCreatureInput!
-  abilities: PSymAbilityCreateManyWithoutCreatureInput
+  abilities: PSymLocalAbilityCreateManyWithoutCreatureInput
 }
 
 """An edge in a connection."""
@@ -5538,7 +5293,7 @@ input PSymCreatureUpdateInput {
   rulebook: Rulebook
   Conditions: PConditionsUpdateOneWithoutCreatureInput
   attributes: PAttributesUpdateOneWithoutCreatureInput
-  abilities: PSymAbilityUpdateManyWithoutCreatureInput
+  abilities: PSymLocalAbilityUpdateManyWithoutCreatureInput
 }
 
 input PSymCreatureUpdateOneWithoutAbilitiesInput {
@@ -5580,7 +5335,7 @@ input PSymCreatureUpdateWithoutAttributesDataInput {
   shadow: String
   rulebook: Rulebook
   Conditions: PConditionsUpdateOneWithoutCreatureInput
-  abilities: PSymAbilityUpdateManyWithoutCreatureInput
+  abilities: PSymLocalAbilityUpdateManyWithoutCreatureInput
 }
 
 input PSymCreatureUpdateWithoutConditionsDataInput {
@@ -5589,7 +5344,7 @@ input PSymCreatureUpdateWithoutConditionsDataInput {
   shadow: String
   rulebook: Rulebook
   attributes: PAttributesUpdateOneWithoutCreatureInput
-  abilities: PSymAbilityUpdateManyWithoutCreatureInput
+  abilities: PSymLocalAbilityUpdateManyWithoutCreatureInput
 }
 
 input PSymCreatureUpsertWithoutAbilitiesInput {
@@ -5788,13 +5543,458 @@ input PSymCreatureWhereInput {
   rulebook_not_in: [Rulebook!]
   Conditions: PConditionsWhereInput
   attributes: PAttributesWhereInput
-  abilities_every: PSymAbilityWhereInput
-  abilities_some: PSymAbilityWhereInput
-  abilities_none: PSymAbilityWhereInput
+  abilities_every: PSymLocalAbilityWhereInput
+  abilities_some: PSymLocalAbilityWhereInput
+  abilities_none: PSymLocalAbilityWhereInput
 }
 
 input PSymCreatureWhereUniqueInput {
   id: ID
+}
+
+type PSymLocalAbility implements Node {
+  id: ID!
+  creature(where: PSymCreatureWhereInput): PSymCreature!
+  rank: SymAbilityRank!
+  presets(where: PSymPresetAbilityWhereInput, orderBy: PSymPresetAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymPresetAbility!]
+}
+
+"""A connection to a list of items."""
+type PSymLocalAbilityConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PSymLocalAbilityEdge]!
+  aggregate: AggregatePSymLocalAbility!
+}
+
+input PSymLocalAbilityCreateInput {
+  rank: SymAbilityRank!
+  creature: PSymCreatureCreateOneWithoutAbilitiesInput!
+  presets: PSymPresetAbilityCreateManyInput
+}
+
+input PSymLocalAbilityCreateManyWithoutCreatureInput {
+  create: [PSymLocalAbilityCreateWithoutCreatureInput!]
+  connect: [PSymLocalAbilityWhereUniqueInput!]
+}
+
+input PSymLocalAbilityCreateWithoutCreatureInput {
+  rank: SymAbilityRank!
+  presets: PSymPresetAbilityCreateManyInput
+}
+
+"""An edge in a connection."""
+type PSymLocalAbilityEdge {
+  """The item at the end of the edge."""
+  node: PSymLocalAbility!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PSymLocalAbilityOrderByInput {
+  id_ASC
+  id_DESC
+  rank_ASC
+  rank_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PSymLocalAbilityPreviousValues {
+  id: ID!
+  rank: SymAbilityRank!
+}
+
+type PSymLocalAbilitySubscriptionPayload {
+  mutation: MutationType!
+  node: PSymLocalAbility
+  updatedFields: [String!]
+  previousValues: PSymLocalAbilityPreviousValues
+}
+
+input PSymLocalAbilitySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PSymLocalAbilitySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PSymLocalAbilitySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PSymLocalAbilitySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PSymLocalAbilityWhereInput
+}
+
+input PSymLocalAbilityUpdateInput {
+  rank: SymAbilityRank
+  creature: PSymCreatureUpdateOneWithoutAbilitiesInput
+  presets: PSymPresetAbilityUpdateManyInput
+}
+
+input PSymLocalAbilityUpdateManyWithoutCreatureInput {
+  create: [PSymLocalAbilityCreateWithoutCreatureInput!]
+  connect: [PSymLocalAbilityWhereUniqueInput!]
+  disconnect: [PSymLocalAbilityWhereUniqueInput!]
+  delete: [PSymLocalAbilityWhereUniqueInput!]
+  update: [PSymLocalAbilityUpdateWithWhereUniqueWithoutCreatureInput!]
+  upsert: [PSymLocalAbilityUpsertWithWhereUniqueWithoutCreatureInput!]
+}
+
+input PSymLocalAbilityUpdateWithoutCreatureDataInput {
+  rank: SymAbilityRank
+  presets: PSymPresetAbilityUpdateManyInput
+}
+
+input PSymLocalAbilityUpdateWithWhereUniqueWithoutCreatureInput {
+  where: PSymLocalAbilityWhereUniqueInput!
+  data: PSymLocalAbilityUpdateWithoutCreatureDataInput!
+}
+
+input PSymLocalAbilityUpsertWithWhereUniqueWithoutCreatureInput {
+  where: PSymLocalAbilityWhereUniqueInput!
+  update: PSymLocalAbilityUpdateWithoutCreatureDataInput!
+  create: PSymLocalAbilityCreateWithoutCreatureInput!
+}
+
+input PSymLocalAbilityWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PSymLocalAbilityWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PSymLocalAbilityWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PSymLocalAbilityWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  rank: SymAbilityRank
+
+  """All values that are not equal to given value."""
+  rank_not: SymAbilityRank
+
+  """All values that are contained in given list."""
+  rank_in: [SymAbilityRank!]
+
+  """All values that are not contained in given list."""
+  rank_not_in: [SymAbilityRank!]
+  creature: PSymCreatureWhereInput
+  presets_every: PSymPresetAbilityWhereInput
+  presets_some: PSymPresetAbilityWhereInput
+  presets_none: PSymPresetAbilityWhereInput
+}
+
+input PSymLocalAbilityWhereUniqueInput {
+  id: ID
+}
+
+type PSymPresetAbility implements Node {
+  id: ID!
+  title: String!
+  description(where: PSymAbilityDescriptionWhereInput, orderBy: PSymAbilityDescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymAbilityDescription!]
+}
+
+"""A connection to a list of items."""
+type PSymPresetAbilityConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PSymPresetAbilityEdge]!
+  aggregate: AggregatePSymPresetAbility!
+}
+
+input PSymPresetAbilityCreateInput {
+  title: String!
+  description: PSymAbilityDescriptionCreateManyWithoutAbilityInput
+}
+
+input PSymPresetAbilityCreateManyInput {
+  create: [PSymPresetAbilityCreateInput!]
+  connect: [PSymPresetAbilityWhereUniqueInput!]
+}
+
+input PSymPresetAbilityCreateOneWithoutDescriptionInput {
+  create: PSymPresetAbilityCreateWithoutDescriptionInput
+  connect: PSymPresetAbilityWhereUniqueInput
+}
+
+input PSymPresetAbilityCreateWithoutDescriptionInput {
+  title: String!
+}
+
+"""An edge in a connection."""
+type PSymPresetAbilityEdge {
+  """The item at the end of the edge."""
+  node: PSymPresetAbility!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PSymPresetAbilityOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PSymPresetAbilityPreviousValues {
+  id: ID!
+  title: String!
+}
+
+type PSymPresetAbilitySubscriptionPayload {
+  mutation: MutationType!
+  node: PSymPresetAbility
+  updatedFields: [String!]
+  previousValues: PSymPresetAbilityPreviousValues
+}
+
+input PSymPresetAbilitySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PSymPresetAbilitySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PSymPresetAbilitySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PSymPresetAbilitySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PSymPresetAbilityWhereInput
+}
+
+input PSymPresetAbilityUpdateDataInput {
+  title: String
+  description: PSymAbilityDescriptionUpdateManyWithoutAbilityInput
+}
+
+input PSymPresetAbilityUpdateInput {
+  title: String
+  description: PSymAbilityDescriptionUpdateManyWithoutAbilityInput
+}
+
+input PSymPresetAbilityUpdateManyInput {
+  create: [PSymPresetAbilityCreateInput!]
+  connect: [PSymPresetAbilityWhereUniqueInput!]
+  disconnect: [PSymPresetAbilityWhereUniqueInput!]
+  delete: [PSymPresetAbilityWhereUniqueInput!]
+  update: [PSymPresetAbilityUpdateWithWhereUniqueNestedInput!]
+  upsert: [PSymPresetAbilityUpsertWithWhereUniqueNestedInput!]
+}
+
+input PSymPresetAbilityUpdateOneWithoutDescriptionInput {
+  create: PSymPresetAbilityCreateWithoutDescriptionInput
+  connect: PSymPresetAbilityWhereUniqueInput
+  delete: Boolean
+  update: PSymPresetAbilityUpdateWithoutDescriptionDataInput
+  upsert: PSymPresetAbilityUpsertWithoutDescriptionInput
+}
+
+input PSymPresetAbilityUpdateWithoutDescriptionDataInput {
+  title: String
+}
+
+input PSymPresetAbilityUpdateWithWhereUniqueNestedInput {
+  where: PSymPresetAbilityWhereUniqueInput!
+  data: PSymPresetAbilityUpdateDataInput!
+}
+
+input PSymPresetAbilityUpsertWithoutDescriptionInput {
+  update: PSymPresetAbilityUpdateWithoutDescriptionDataInput!
+  create: PSymPresetAbilityCreateWithoutDescriptionInput!
+}
+
+input PSymPresetAbilityUpsertWithWhereUniqueNestedInput {
+  where: PSymPresetAbilityWhereUniqueInput!
+  update: PSymPresetAbilityUpdateDataInput!
+  create: PSymPresetAbilityCreateInput!
+}
+
+input PSymPresetAbilityWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PSymPresetAbilityWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PSymPresetAbilityWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PSymPresetAbilityWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  description_every: PSymAbilityDescriptionWhereInput
+  description_some: PSymAbilityDescriptionWhereInput
+  description_none: PSymAbilityDescriptionWhereInput
+  _MagicalBackRelation_PSymLocalAbilityToPSymPresetAbility_every: PSymLocalAbilityWhereInput
+  _MagicalBackRelation_PSymLocalAbilityToPSymPresetAbility_some: PSymLocalAbilityWhereInput
+  _MagicalBackRelation_PSymLocalAbilityToPSymPresetAbility_none: PSymLocalAbilityWhereInput
+}
+
+input PSymPresetAbilityWhereUniqueInput {
+  id: ID
+  title: String
 }
 
 type Query {
@@ -5811,7 +6011,7 @@ type Query {
   fitnesses(where: FitnessWhereInput, orderBy: FitnessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fitness]!
   corruptions(where: CorruptionWhereInput, orderBy: CorruptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Corruption]!
   pSymCreatures(where: PSymCreatureWhereInput, orderBy: PSymCreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymCreature]!
-  pSymAbilities(where: PSymAbilityWhereInput, orderBy: PSymAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymAbility]!
+  pSymLocalAbilities(where: PSymLocalAbilityWhereInput, orderBy: PSymLocalAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymLocalAbility]!
   pSymAbilityDescriptions(where: PSymAbilityDescriptionWhereInput, orderBy: PSymAbilityDescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymAbilityDescription]!
   pAttributeses(where: PAttributesWhereInput, orderBy: PAttributesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PAttributes]!
   pConditionses(where: PConditionsWhereInput, orderBy: PConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PConditions]!
@@ -5819,6 +6019,7 @@ type Query {
   pSpiritualConditionses(where: PSpiritualConditionsWhereInput, orderBy: PSpiritualConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSpiritualConditions]!
   pFitnesses(where: PFitnessWhereInput, orderBy: PFitnessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PFitness]!
   pCorruptions(where: PCorruptionWhereInput, orderBy: PCorruptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PCorruption]!
+  pSymPresetAbilities(where: PSymPresetAbilityWhereInput, orderBy: PSymPresetAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PSymPresetAbility]!
   user(where: UserWhereUniqueInput!): User
   project(where: ProjectWhereUniqueInput!): Project
   event(where: EventWhereUniqueInput!): Event
@@ -5832,7 +6033,7 @@ type Query {
   fitness(where: FitnessWhereUniqueInput!): Fitness
   corruption(where: CorruptionWhereUniqueInput!): Corruption
   pSymCreature(where: PSymCreatureWhereUniqueInput!): PSymCreature
-  pSymAbility(where: PSymAbilityWhereUniqueInput!): PSymAbility
+  pSymLocalAbility(where: PSymLocalAbilityWhereUniqueInput!): PSymLocalAbility
   pSymAbilityDescription(where: PSymAbilityDescriptionWhereUniqueInput!): PSymAbilityDescription
   pAttributes(where: PAttributesWhereUniqueInput!): PAttributes
   pConditions(where: PConditionsWhereUniqueInput!): PConditions
@@ -5840,6 +6041,7 @@ type Query {
   pSpiritualConditions(where: PSpiritualConditionsWhereUniqueInput!): PSpiritualConditions
   pFitness(where: PFitnessWhereUniqueInput!): PFitness
   pCorruption(where: PCorruptionWhereUniqueInput!): PCorruption
+  pSymPresetAbility(where: PSymPresetAbilityWhereUniqueInput!): PSymPresetAbility
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
@@ -5853,7 +6055,7 @@ type Query {
   fitnessesConnection(where: FitnessWhereInput, orderBy: FitnessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FitnessConnection!
   corruptionsConnection(where: CorruptionWhereInput, orderBy: CorruptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CorruptionConnection!
   pSymCreaturesConnection(where: PSymCreatureWhereInput, orderBy: PSymCreatureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PSymCreatureConnection!
-  pSymAbilitiesConnection(where: PSymAbilityWhereInput, orderBy: PSymAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PSymAbilityConnection!
+  pSymLocalAbilitiesConnection(where: PSymLocalAbilityWhereInput, orderBy: PSymLocalAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PSymLocalAbilityConnection!
   pSymAbilityDescriptionsConnection(where: PSymAbilityDescriptionWhereInput, orderBy: PSymAbilityDescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PSymAbilityDescriptionConnection!
   pAttributesesConnection(where: PAttributesWhereInput, orderBy: PAttributesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PAttributesConnection!
   pConditionsesConnection(where: PConditionsWhereInput, orderBy: PConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PConditionsConnection!
@@ -5861,6 +6063,7 @@ type Query {
   pSpiritualConditionsesConnection(where: PSpiritualConditionsWhereInput, orderBy: PSpiritualConditionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PSpiritualConditionsConnection!
   pFitnessesConnection(where: PFitnessWhereInput, orderBy: PFitnessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PFitnessConnection!
   pCorruptionsConnection(where: PCorruptionWhereInput, orderBy: PCorruptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PCorruptionConnection!
+  pSymPresetAbilitiesConnection(where: PSymPresetAbilityWhereInput, orderBy: PSymPresetAbilityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PSymPresetAbilityConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -6085,7 +6288,7 @@ type Subscription {
   fitness(where: FitnessSubscriptionWhereInput): FitnessSubscriptionPayload
   corruption(where: CorruptionSubscriptionWhereInput): CorruptionSubscriptionPayload
   pSymCreature(where: PSymCreatureSubscriptionWhereInput): PSymCreatureSubscriptionPayload
-  pSymAbility(where: PSymAbilitySubscriptionWhereInput): PSymAbilitySubscriptionPayload
+  pSymLocalAbility(where: PSymLocalAbilitySubscriptionWhereInput): PSymLocalAbilitySubscriptionPayload
   pSymAbilityDescription(where: PSymAbilityDescriptionSubscriptionWhereInput): PSymAbilityDescriptionSubscriptionPayload
   pAttributes(where: PAttributesSubscriptionWhereInput): PAttributesSubscriptionPayload
   pConditions(where: PConditionsSubscriptionWhereInput): PConditionsSubscriptionPayload
@@ -6093,6 +6296,7 @@ type Subscription {
   pSpiritualConditions(where: PSpiritualConditionsSubscriptionWhereInput): PSpiritualConditionsSubscriptionPayload
   pFitness(where: PFitnessSubscriptionWhereInput): PFitnessSubscriptionPayload
   pCorruption(where: PCorruptionSubscriptionWhereInput): PCorruptionSubscriptionPayload
+  pSymPresetAbility(where: PSymPresetAbilitySubscriptionWhereInput): PSymPresetAbilitySubscriptionPayload
 }
 
 enum SymAbilityRank {

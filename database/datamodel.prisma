@@ -115,7 +115,7 @@ type PSymCreature {
   rulebook: Rulebook!
   Conditions: PConditions! @relation(name: "PConditionsByPSymCreature", onDelete: CASCADE)
   attributes: PAttributes! @relation(name: "PAttributesByPSymCreature", onDelete: CASCADE)
-  abilities: [PSymLocalAbility!]! @relation(name: "PSymCreatureByPSymAbility", onDelete: SET_NULL)
+  abilities: [PSymLocalAbility!]! @relation(name: "PSymCreatureByPSymAbility", onDelete: CASCADE)
 }
 
 type PSymLocalAbility {
@@ -127,7 +127,7 @@ type PSymLocalAbility {
 
 type PSymPresetAbility {
   id: ID! @unique
-  title: String!
+  title: String! @unique
   description: [PSymAbilityDescription!]!  @relation(name: "PAbilityDescriptionByPresetAbility", onDelete: CASCADE)
 }
 
