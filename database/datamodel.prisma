@@ -41,6 +41,23 @@ type Creature {
   rulebook: Rulebook!
   Conditions: Conditions! @relation(name: "ConditionsByCreature", onDelete: CASCADE)
   attributes: Attributes! @relation(name: "AttributesByCreature", onDelete: CASCADE)
+  abilities: [Ability!]! @relation(name: "AbilitiesByCreature", onDelete: CASCADE)
+}
+
+type Ability {
+  id: ID! @unique
+  creature: Creature! @relation(name: "AbilitiesByCreature", onDelete: SET_NULL)
+  currentRank: SymAbilityRank!
+  title: String!
+  description: [AbilityDescription!]! @relation(name: "AbilityDescriptionByAbility", onDelete: CASCADE)
+}
+
+type AbilityDescription {
+  id: ID! @unique
+  ability: Ability! @relation(name: "AbilityDescriptionByAbility", onDelete: SET_NULL)
+  type: SymAbilityType!
+  rank: SymAbilityRank!
+  description: String!
 }
 
 type Attributes {
@@ -91,6 +108,86 @@ type Corruption {
   permanent: Int!
 }
 
+type PSymCreature {
+  id: ID! @unique
+  name: String
+  race: String!
+  shadow: String
+  rulebook: Rulebook!
+  Conditions: PConditions! @relation(name: "PConditionsByPSymCreature", onDelete: CASCADE)
+  attributes: PAttributes! @relation(name: "PAttributesByPSymCreature", onDelete: CASCADE)
+  abilities: [PSymLocalAbility!]! @relation(name: "PSymCreatureByPSymAbility", onDelete: CASCADE)
+}
+
+type PSymLocalAbility {
+  id: ID! @unique
+  creature: PSymCreature! @relation(name: "PSymCreatureByPSymAbility", onDelete: SET_NULL)
+  rank: SymAbilityRank!
+  preset: PSymPresetAbility
+}
+
+type PSymPresetAbility {
+  id: ID! @unique
+  title: String! @unique
+  description: [PSymAbilityDescription!]!  @relation(name: "PAbilityDescriptionByPresetAbility", onDelete: CASCADE)
+}
+
+type PSymAbilityDescription {
+  id: ID! @unique
+  ability: PSymPresetAbility! @relation(name: "PAbilityDescriptionByPresetAbility", onDelete: SET_NULL)
+  type: SymAbilityType!
+  rank: SymAbilityRank!
+  description: String!
+}
+
+type PAttributes {
+  id: ID! @unique
+  creature: PSymCreature! @relation(name: "PAttributesByPSymCreature", onDelete: SET_NULL)
+  accurate: Int!
+  cunning: Int!
+  discreet: Int!
+  persuasive: Int!
+  quick: Int!
+  resolute: Int!
+  strong: Int!
+  vigilant: Int!
+  defense: Int!
+}
+
+type PConditions {
+  id: ID! @unique
+  creature: PSymCreature! @relation(name: "PConditionsByPSymCreature", onDelete: SET_NULL)
+  physical: PPhysicalConditions! @relation(name: "PConditionsByPhysicalCondition", onDelete: CASCADE)
+  spiritual: PSpiritualConditions! @relation(name: "PConditionsBySpiritualCondition", onDelete: CASCADE)
+}
+
+type PPhysicalConditions {
+  id: ID! @unique
+  conditions: PConditions! @relation(name: "PConditionsByPhysicalCondition", onDelete: SET_NULL)
+  fitness: PFitness! @relation(name: "PPhysicalConditionsByFitness", onDelete: CASCADE)
+}
+
+type PSpiritualConditions {
+  id: ID! @unique
+  conditions: PConditions! @relation(name: "PConditionsBySpiritualCondition", onDelete: SET_NULL)
+  corruption: PCorruption! @relation(name: "PCorruptionBySpiritualConditions", onDelete: CASCADE)
+}
+
+type PFitness {
+  id: ID! @unique
+  physicalConditions: PPhysicalConditions! @relation(name: "PPhysicalConditionsByFitness", onDelete: SET_NULL)
+  toughness: Int!
+  painThreshold: Int!
+}
+
+type PCorruption {
+  id: ID! @unique
+  spiritualConditions: PSpiritualConditions! @relation(name: "PCorruptionBySpiritualConditions", onDelete: SET_NULL)
+  current: Int!
+  threshold: Int!
+  permanent: Int!
+}
+
 #----------ENUMS----------
 enum EventRole {
   GENERIC
@@ -102,4 +199,18 @@ enum Rulebook {
   SYMBAROUM
   COC
   DSA
+}
+
+enum SymAbilityType {
+  ACTIVE
+  FREE
+  PASSIVE
+  REACTION
+  SPECIAL
+}
+
+enum SymAbilityRank {
+  NOVICE
+  ADEPT
+  MASTER
 }

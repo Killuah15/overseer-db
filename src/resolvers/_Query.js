@@ -6,6 +6,7 @@ import event from './_Queries/event';
 import currentUser from './_Queries/currentUser';
 import project from './_Queries/project';
 import creature from './_Queries/creature';
+import pcreatures from './_Queries/pcreatures';
 
 const Query = {
     users,
@@ -15,7 +16,8 @@ const Query = {
     event,
     currentUser,
     project,
-    creature
+    creature,
+    pcreatures
 }
 
 export default Query

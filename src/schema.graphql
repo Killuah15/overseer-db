@@ -1,4 +1,4 @@
-#import Event,Project,Creature,Attributes,Conditions,PhysicalConditions,SpiritualConditions,Fitness,Corruption,EventRole,Rulebook from "./generated/prisma.graphql"
+#import Event,Project,Creature,Attributes,Conditions,PhysicalConditions,SpiritualConditions,Fitness,Corruption,EventRole,Rulebook,PSymCreature,PSymLocalAbility,PSymPresetAbility,PSymAbilityDescription,PAttributes,PConditions,PPhysicalConditions,PSpiritualConditions,PFitness,PCorruption,SymAbilityType,SymAbilityRank from "./generated/prisma.graphql"
 #----------TYPES----------
 type User {
   id: ID!
@@ -21,6 +21,7 @@ type Query {
   projects: [Project!]!
   events(projectID: ID, projectTitle: String): [Event!]!
   creatures(projectID: ID, projectTitle: String, eventID: ID, eventTitle: String, fromRulebook: Rulebook): [Creature!]!
+  pcreatures(rulebook: Rulebook!): [PSymCreature!]!
   currentUser: User!
   project(id: ID!): Project!
   event(id: ID!): Event!
@@ -71,8 +72,21 @@ input CreatureInput {
   race: String!
   shadow: String
   rulebook: Rulebook!
-  Conditions: ConditionsInput
-  attributes: AttributesInput
+  Conditions: ConditionsInput!
+  attributes: AttributesInput!
+  abilities: [AbilityInput!]!
+}
+
+input AbilityInput {
+  currentRank: SymAbilityRank!
+  title: String!
+  descriptions: [AbilityDescriptionsInput!]!
+}
+
+input AbilityDescriptionsInput {
+  type: SymAbilityType!
+  rank: SymAbilityRank!
+  description: String!
 }
 
 input AttributesInput {
